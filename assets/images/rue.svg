@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#191c22"/>
+      <stop offset="1" stop-color="#33383f"/>
+    </linearGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.65"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <g fill="#0b0d11">
+    <rect x="0" y="120" width="150" height="330"/>
+    <rect x="650" y="100" width="150" height="350"/>
+  </g>
+  <g fill="#1c2129">
+    <rect x="150" y="180" width="90" height="270"/>
+    <rect x="560" y="160" width="90" height="290"/>
+  </g>
+  <g fill="#d9a441" opacity="0.6">
+    <rect x="30" y="160" width="14" height="16"/>
+    <rect x="70" y="220" width="14" height="16"/>
+    <rect x="690" y="200" width="14" height="16"/>
+  </g>
+  <g fill="#05070a">
+    <rect x="240" y="450" width="320" height="60" fill="#101318"/>
+    <polygon points="240,450 560,450 640,600 160,600" fill="#14171d"/>
+    <polygon points="380,450 420,450 440,600 360,600" fill="#3a3f47" opacity="0.5"/>
+  </g>
+  <g fill="#0d1015">
+    <rect x="270" y="380" width="90" height="45" rx="14"/>
+    <rect x="285" y="362" width="55" height="28" rx="10"/>
+    <circle cx="292" cy="428" r="12"/>
+    <circle cx="340" cy="428" r="12"/>
+    <rect x="450" y="390" width="80" height="40" rx="12"/>
+    <rect x="462" y="374" width="48" height="24" rx="9"/>
+    <circle cx="466" cy="433" r="11"/>
+    <circle cx="512" cy="433" r="11"/>
+  </g>
+  <g fill="#080a0d">
+    <circle cx="400" cy="330" r="6"/>
+    <rect x="395" y="335" width="10" height="30" rx="4"/>
+    <circle cx="430" cy="335" r="6"/>
+    <rect x="425" y="340" width="10" height="26" rx="4"/>
+    <circle cx="370" cy="338" r="6"/>
+    <rect x="365" y="343" width="10" height="24" rx="4"/>
+    <circle cx="460" cy="342" r="6"/>
+    <rect x="455" y="347" width="10" height="22" rx="4"/>
+  </g>
+  <rect x="0" y="300" width="800" height="70" fill="#9aa4ad" opacity="0.06"/>
+  <rect width="800" height="600" fill="url(#vig)"/>
+</svg>

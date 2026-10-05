@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Outillage / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Génération d'images : sorties et sondes temporaires
+assets/images/probe_*
+assets/images/*.tmp
+
+# Fichiers de test d'image
+assets/images/*_test.*

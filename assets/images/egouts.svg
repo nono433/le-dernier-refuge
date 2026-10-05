@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <radialGradient id="exit" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#c8d2e0" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#c8d2e0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.4" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.85"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="#07090c"/>
+  <ellipse cx="400" cy="300" rx="360" ry="260" fill="url(#exit)"/>
+  <path d="M150 600 L150 250 Q400 100 650 250 L650 600" fill="#0d1015"/>
+  <path d="M220 600 L220 300 Q400 180 580 300 L580 600" fill="#11141a"/>
+  <path d="M290 600 L290 340 Q400 250 510 340 L510 600" fill="#151a21"/>
+  <rect x="0" y="480" width="800" height="120" fill="#0a0d10"/>
+  <g stroke="#3a4a55" stroke-width="3" opacity="0.5">
+    <line x1="250" y1="510" x2="550" y2="510"/>
+    <line x1="280" y1="550" x2="520" y2="550"/>
+  </g>
+  <g fill="#1c212a">
+    <rect x="330" y="200" width="14" height="60"/>
+    <rect x="300" y="180" width="74" height="26" rx="4"/>
+  </g>
+  <circle cx="337" cy="193" r="4" fill="#d9a441"/>
+  <rect width="800" height="600" fill="url(#vig)"/>
+</svg>

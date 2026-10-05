@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#181b21"/>
+      <stop offset="1" stop-color="#2e333b"/>
+    </linearGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.65"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <g fill="#0b0d11">
+    <rect x="0" y="200" width="140" height="280"/>
+    <rect x="660" y="180" width="140" height="300"/>
+  </g>
+  <rect x="220" y="120" width="360" height="360" fill="#14171d"/>
+  <rect x="220" y="120" width="360" height="360" fill="none" stroke="#0a0c10" stroke-width="6"/>
+  <g>
+    <rect x="245" y="145" width="34" height="42" fill="#0a0c10"/>
+    <rect x="295" y="145" width="34" height="42" fill="#d9a441" opacity="0.7"/>
+    <rect x="345" y="145" width="34" height="42" fill="#0a0c10"/>
+    <rect x="395" y="145" width="34" height="42" fill="#0a0c10"/>
+    <rect x="445" y="145" width="34" height="42" fill="#d9a441" opacity="0.5"/>
+    <rect x="495" y="145" width="34" height="42" fill="#0a0c10"/>
+    <rect x="245" y="210" width="34" height="42" fill="#0a0c10"/>
+    <rect x="295" y="210" width="34" height="42" fill="#0a0c10"/>
+    <rect x="345" y="210" width="34" height="42" fill="#d9a441" opacity="0.6"/>
+    <rect x="395" y="210" width="34" height="42" fill="#0a0c10"/>
+    <rect x="445" y="210" width="34" height="42" fill="#0a0c10"/>
+    <rect x="495" y="210" width="34" height="42" fill="#0a0c10"/>
+    <rect x="245" y="275" width="34" height="42" fill="#d9a441" opacity="0.45"/>
+    <rect x="295" y="275" width="34" height="42" fill="#0a0c10"/>
+    <rect x="345" y="275" width="34" height="42" fill="#0a0c10"/>
+    <rect x="395" y="275" width="34" height="42" fill="#d9a441" opacity="0.7"/>
+    <rect x="445" y="275" width="34" height="42" fill="#0a0c10"/>
+    <rect x="495" y="275" width="34" height="42" fill="#0a0c10"/>
+    <rect x="245" y="340" width="34" height="42" fill="#0a0c10"/>
+    <rect x="295" y="340" width="34" height="42" fill="#0a0c10"/>
+    <rect x="345" y="340" width="34" height="42" fill="#0a0c10"/>
+    <rect x="395" y="340" width="34" height="42" fill="#0a0c10"/>
+    <rect x="445" y="340" width="34" height="42" fill="#d9a441" opacity="0.5"/>
+    <rect x="495" y="340" width="34" height="42" fill="#0a0c10"/>
+    <rect x="245" y="405" width="34" height="42" fill="#0a0c10"/>
+    <rect x="295" y="405" width="34" height="42" fill="#d9a441" opacity="0.6"/>
+    <rect x="345" y="405" width="34" height="42" fill="#0a0c10"/>
+    <rect x="395" y="405" width="34" height="42" fill="#0a0c10"/>
+    <rect x="445" y="405" width="34" height="42" fill="#0a0c10"/>
+    <rect x="495" y="405" width="34" height="42" fill="#0a0c10"/>
+  </g>
+  <rect x="0" y="480" width="800" height="120" fill="#0a0c10"/>
+  <rect width="800" height="600" fill="url(#vig)"/>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0e1016"/>
+      <stop offset="1" stop-color="#1f232c"/>
+    </linearGradient>
+    <radialGradient id="fire" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#e8c56a" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#e8c56a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.45" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.75"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <g fill="#e8e4d8" opacity="0.8">
+    <circle cx="90" cy="60" r="2"/>
+    <circle cx="180" cy="40" r="1.6"/>
+    <circle cx="300" cy="80" r="2"/>
+    <circle cx="430" cy="45" r="1.6"/>
+    <circle cx="560" cy="70" r="2"/>
+    <circle cx="690" cy="50" r="1.6"/>
+    <circle cx="760" cy="90" r="2"/>
+    <circle cx="380" cy="30" r="1.6"/>
+    <circle cx="640" cy="110" r="1.6"/>
+  </g>
+  <circle cx="620" cy="120" r="34" fill="#ddd6c4" opacity="0.8"/>
+  <rect x="0" y="460" width="800" height="140" fill="#080a0d"/>
+  <circle cx="400" cy="480" r="80" fill="url(#fire)"/>
+  <g>
+    <polygon points="388,478 400,440 412,478" fill="#e8c56a"/>
+    <polygon points="393,478 400,450 407,478" fill="#d97b3a"/>
+    <rect x="376" y="476" width="48" height="9" rx="4" fill="#2a2118"/>
+  </g>
+  <g fill="#0d1015">
+    <ellipse cx="520" cy="490" rx="46" ry="12"/>
+    <circle cx="488" cy="478" r="10"/>
+  </g>
+  <g fill="none" stroke="#4f7a8a" stroke-width="3" opacity="0.7">
+    <path d="M470 440 Q500 420 530 440"/>
+    <path d="M458 424 Q500 396 542 424"/>
+    <path d="M446 408 Q500 372 554 408"/>
+  </g>
+  <rect width="800" height="600" fill="url(#vig)"/>
+</svg>

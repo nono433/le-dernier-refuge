@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c1a20"/>
+      <stop offset="1" stop-color="#35323c"/>
+    </linearGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.65"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="640" cy="100" r="40" fill="#ddd6c4" opacity="0.8"/>
+  <rect x="0" y="430" width="800" height="170" fill="#0b0d10"/>
+  <g>
+    <rect x="300" y="280" width="220" height="160" fill="#14171d"/>
+    <polygon points="280,280 410,190 540,280" fill="#0d1015"/>
+    <rect x="390" y="360" width="45" height="80" fill="#05070a"/>
+    <rect x="320" y="310" width="45" height="45" fill="#1c2129"/>
+    <line x1="320" y1="310" x2="365" y2="355" stroke="#05070a" stroke-width="4"/>
+    <line x1="365" y1="310" x2="320" y2="355" stroke="#05070a" stroke-width="4"/>
+    <rect x="455" y="310" width="45" height="45" fill="#0a0c10"/>
+    <rect x="395" y="220" width="30" height="40" fill="#0d1015"/>
+  </g>
+  <polygon points="410,440 410,600 520,600" fill="#1a1e25" opacity="0.7"/>
+  <g stroke="#0a0c10" stroke-width="7" fill="none">
+    <path d="M180 430 L180 330"/>
+    <path d="M180 350 L140 310"/>
+    <path d="M180 370 L220 330"/>
+    <path d="M180 390 L145 360"/>
+  </g>
+  <g fill="#0d1015">
+    <rect x="120" y="400" width="14" height="34"/>
+    <rect x="150" y="408" width="14" height="26"/>
+    <rect x="640" y="404" width="14" height="30"/>
+    <rect x="672" y="398" width="14" height="36"/>
+  </g>
+  <rect x="0" y="380" width="800" height="50" fill="#9aa4ad" opacity="0.05"/>
+  <rect width="800" height="600" fill="url(#vig)"/>
+</svg>

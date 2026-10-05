@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#12141a"/>
+      <stop offset="1" stop-color="#252a33"/>
+    </linearGradient>
+    <radialGradient id="warm" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#e8c56a" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#e8c56a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.7"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <g fill="#e8e4d8" opacity="0.6">
+    <circle cx="120" cy="70" r="2"/>
+    <circle cx="250" cy="45" r="1.6"/>
+    <circle cx="420" cy="80" r="2"/>
+    <circle cx="600" cy="50" r="1.6"/>
+    <circle cx="720" cy="90" r="2"/>
+  </g>
+  <g fill="#0a0d09">
+    <rect x="80" y="100" width="30" height="360"/>
+    <rect x="640" y="80" width="36" height="380"/>
+    <rect x="720" y="120" width="26" height="340"/>
+  </g>
+  <rect x="0" y="450" width="800" height="150" fill="#080a07"/>
+  <g fill="#14171d">
+    <rect x="300" y="300" width="180" height="150"/>
+    <polygon points="285,300 390,230 495,300"/>
+  </g>
+  <circle cx="390" cy="360" r="55" fill="url(#warm)"/>
+  <rect x="368" y="340" width="44" height="46" fill="#d9a441" opacity="0.9"/>
+  <rect x="368" y="340" width="44" height="46" fill="none" stroke="#0d1015" stroke-width="5"/>
+  <g>
+    <ellipse cx="560" cy="480" rx="26" ry="10" fill="#1c1a14"/>
+    <polygon points="548,478 560,452 572,478" fill="#e8c56a"/>
+    <polygon points="552,478 560,460 568,478" fill="#d97b3a"/>
+    <rect x="534" y="478" width="52" height="8" rx="4" fill="#2a2118"/>
+  </g>
+  <rect width="800" height="600" fill="url(#vig)"/>
+</svg>

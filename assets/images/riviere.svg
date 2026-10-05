@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d1a20"/>
+      <stop offset="1" stop-color="#35323c"/>
+    </linearGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.65"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <g fill="#0a0d09">
+    <rect x="40" y="120" width="30" height="240"/>
+    <rect x="700" y="100" width="34" height="260"/>
+    <rect x="750" y="140" width="24" height="220"/>
+  </g>
+  <rect x="0" y="360" width="800" height="240" fill="#141a1e"/>
+  <g stroke="#3a4a55" stroke-width="3" opacity="0.6">
+    <line x1="40" y1="400" x2="300" y2="400"/>
+    <line x1="420" y1="430" x2="700" y2="430"/>
+    <line x1="80" y1="470" x2="380" y2="470"/>
+    <line x1="460" y1="510" x2="760" y2="510"/>
+    <line x1="140" y1="550" x2="420" y2="550"/>
+  </g>
+  <g>
+    <path d="M300 360 Q400 280 500 360" fill="none" stroke="#1c212a" stroke-width="26"/>
+    <path d="M300 360 Q400 280 500 360" fill="none" stroke="#232936" stroke-width="18"/>
+    <line x1="330" y1="340" x2="330" y2="300" stroke="#1c212a" stroke-width="8"/>
+    <line x1="470" y1="340" x2="470" y2="300" stroke="#1c212a" stroke-width="8"/>
+  </g>
+  <g>
+    <rect x="580" y="280" width="10" height="80" fill="#14171d"/>
+    <rect x="540" y="250" width="90" height="34" rx="4" fill="#2a4a3a"/>
+    <polygon points="610,258 645,267 610,276" fill="#e8e2d2"/>
+  </g>
+  <rect width="800" height="600" fill="url(#vig)"/>
+</svg>

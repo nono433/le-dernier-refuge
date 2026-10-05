@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <radialGradient id="fade" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#c8d2e0" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#c8d2e0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.3" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.92"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="#05060a"/>
+  <circle cx="400" cy="280" r="150" fill="url(#fade)"/>
+  <circle cx="400" cy="280" r="26" fill="#c8d2e0" opacity="0.35"/>
+  <g fill="#030408">
+    <circle cx="180" cy="300" r="16"/>
+    <rect x="168" y="314" width="24" height="70" rx="8"/>
+    <circle cx="620" cy="290" r="16"/>
+    <rect x="608" y="304" width="24" height="76" rx="8"/>
+    <circle cx="120" cy="360" r="14"/>
+    <rect x="110" y="372" width="20" height="60" rx="7"/>
+    <circle cx="690" cy="350" r="14"/>
+    <rect x="680" y="362" width="20" height="64" rx="7"/>
+  </g>
+  <rect width="800" height="600" fill="url(#vig)"/>
+</svg>

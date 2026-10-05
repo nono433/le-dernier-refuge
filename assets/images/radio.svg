@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#191c22"/>
+      <stop offset="1" stop-color="#0f1216"/>
+    </linearGradient>
+    <radialGradient id="dial" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#e8c56a" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#e8c56a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.45" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.7"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#wall)"/>
+  <rect x="0" y="420" width="800" height="180" fill="#0b0d11"/>
+  <rect x="180" y="360" width="440" height="60" fill="#171b23"/>
+  <rect x="180" y="360" width="440" height="8" fill="#232936"/>
+  <g fill="#1c212a">
+    <rect x="220" y="220" width="240" height="140" rx="10"/>
+  </g>
+  <circle cx="300" cy="290" r="70" fill="url(#dial)"/>
+  <circle cx="300" cy="290" r="34" fill="#0d1015"/>
+  <circle cx="300" cy="290" r="34" fill="none" stroke="#3a4353" stroke-width="4"/>
+  <circle cx="300" cy="290" r="6" fill="#d9a441"/>
+  <g stroke="#3a4353" stroke-width="4">
+    <line x1="370" y1="250" x2="370" y2="330"/>
+    <line x1="390" y1="250" x2="390" y2="330"/>
+    <line x1="410" y1="250" x2="410" y2="330"/>
+  </g>
+  <line x1="440" y1="220" x2="500" y2="140" stroke="#3a4353" stroke-width="4"/>
+  <circle cx="500" cy="140" r="5" fill="#3a4353"/>
+  <g fill="none" stroke="#d9a441" stroke-width="3" opacity="0.6">
+    <path d="M520 120 Q545 140 520 160"/>
+    <path d="M545 105 Q580 140 545 175"/>
+  </g>
+  <g fill="#2a3140">
+    <rect x="560" y="320" width="60" height="40" rx="4"/>
+    <rect x="640" y="330" width="50" height="30" rx="4"/>
+  </g>
+  <rect width="800" height="600" fill="url(#vig)"/>
+</svg>

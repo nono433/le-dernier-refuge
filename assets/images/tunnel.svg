@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <radialGradient id="beam" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#e8e4d8" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#e8e4d8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.35" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.85"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="#07090c"/>
+  <polygon points="0,0 800,0 640,600 160,600" fill="#0d1015"/>
+  <polygon points="160,600 640,600 560,480 240,480" fill="#11141a"/>
+  <polygon points="240,480 560,480 520,420 280,420" fill="#151a21"/>
+  <polygon points="280,420 520,420 500,380 300,380" fill="#1a1f28"/>
+  <polygon points="300,380 500,380 490,350 310,350" fill="#1f2530"/>
+  <circle cx="400" cy="300" r="180" fill="url(#beam)"/>
+  <polygon points="400,300 560,600 240,600" fill="#e8e4d8" opacity="0.08"/>
+  <g stroke="#3a4353" stroke-width="4">
+    <line x1="370" y1="600" x2="395" y2="420"/>
+    <line x1="430" y1="600" x2="405" y2="420"/>
+  </g>
+  <g stroke="#232936" stroke-width="3">
+    <line x1="340" y1="520" x2="460" y2="520"/>
+    <line x1="355" y1="480" x2="445" y2="480"/>
+  </g>
+  <g fill="#c0392b">
+    <circle cx="620" cy="330" r="4"/>
+    <circle cx="636" cy="330" r="4"/>
+    <circle cx="180" cy="360" r="4"/>
+    <circle cx="196" cy="360" r="4"/>
+  </g>
+  <rect width="800" height="600" fill="url(#vig)"/>
+</svg>

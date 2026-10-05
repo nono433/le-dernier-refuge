@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <radialGradient id="lamp" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#d9a441" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#d9a441" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.4" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.8"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="#080a0d"/>
+  <rect x="0" y="0" width="800" height="120" fill="#0d1015"/>
+  <g fill="#14171d">
+    <rect x="120" y="120" width="40" height="330"/>
+    <rect x="380" y="120" width="40" height="330"/>
+    <rect x="640" y="120" width="40" height="330"/>
+  </g>
+  <rect x="0" y="450" width="800" height="150" fill="#0a0c10"/>
+  <circle cx="400" cy="120" r="90" fill="url(#lamp)"/>
+  <rect x="392" y="100" width="16" height="24" fill="#d9a441"/>
+  <g fill="#101318">
+    <rect x="180" y="360" width="120" height="55" rx="16"/>
+    <rect x="196" y="338" width="80" height="28" rx="10"/>
+    <circle cx="205" cy="418" r="14"/>
+    <circle cx="275" cy="418" r="14"/>
+  </g>
+  <g fill="#181c24">
+    <rect x="480" y="370" width="130" height="58" rx="16"/>
+    <rect x="496" y="346" width="88" height="30" rx="10"/>
+    <circle cx="492" cy="431" r="15"/>
+    <circle cx="585" cy="431" r="15"/>
+  </g>
+  <g fill="#05070a">
+    <circle cx="400" cy="330" r="8"/>
+    <rect x="393" y="337" width="14" height="40" rx="5"/>
+    <polygon points="393,345 360,385 370,392 398,358" fill="#05070a"/>
+  </g>
+  <g stroke="#3a4353" stroke-width="3" opacity="0.6">
+    <line x1="60" y1="470" x2="740" y2="470"/>
+    <line x1="60" y1="500" x2="740" y2="500"/>
+  </g>
+  <rect width="800" height="600" fill="url(#vig)"/>
+</svg>
