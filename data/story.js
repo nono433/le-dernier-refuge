@@ -669,6 +669,31 @@ const STORY = {
       ]
     },
 
+    /* ---------- ARC 5 MIN — LA RENCONTRE ---------- */
+    /* Cette scène n'est atteignable qu'en durée 5 : c'est le nœud de
+       l'arc « La Traque ». */
+
+    rencontre: {
+      title: "La Rencontre",
+      image: "assets/images/radio.jpg",
+      text: [
+        "Il est là. Un homme, debout dans le noir, la mains levée pour que tu comprennes qu'il n'a pas d'arme.",
+        "Il parle vite, à voix basse. Il s'appelle Adrien. Il te cherche depuis trois semaines et il n'a pas réussi à te dire pourquoi.",
+        "« Ils ont pris la ville le premier jour », dit-il. « Après, je n'ai vu personne. Juste la ville. »",
+        "Il sort quelque chose de sa poche. Une plaque métallique, gravée d'un cercle et d'une double hélice. Le même symbole que sur les dossiers de l'hôpital."
+      ],
+      nova: [
+        "Soixante-douze battements par minute. Il ne ment pas sur ce point.",
+        "Hôte. Cette plaque... elle vient du même endroit que moi. Je ne te l'ai jamais montrée parce que je ne savais pas qu'elle existait ailleurs.",
+        "Il a quelque chose que nous n'avons pas. Je veux savoir quoi."
+      ],
+      choices: [
+        { text: "L'emmener avec toi jusqu'au refuge", next: "refuge" },
+        { text: "Lui demander d'où vient la plaque", next: "hopital", set: "plaque" },
+        { text: "Refuser : il vaut mieux ne pas être suivi", next: "foret" }
+      ]
+    },
+
     /* ---------- L'APPROCHE DU REFUGE ---------- */
 
     lisiere: {
@@ -743,6 +768,420 @@ const STORY = {
         { text: "Enquêter sur le laboratoire du refuge", next: "fin_refuge_secret", requires: "labo" },
         { text: "Demander la vérité à NOVA", next: "fin_transformation", requires: "labo" }
       ]
+    }
+  },
+
+  /* ============================================================
+     VARIANTES PAR DURÉE
+     ------------------------------------------------------------
+     Les trois lectures ne suivent pas les mêmes scènes. Plutôt que de
+     dupliquer les scènes trois fois, chaque durée peut surcharger ici
+     ce qui change : le texte, les répliques de NOVA, le titre, les
+     choix, ou la redirection.
+
+       "rue": {
+         3:  { text: [...], next: "ruines" },
+         5:  { nova: [...] },
+         10: { choices: [...] }   // ou rien : version par défaut
+       }
+
+     Une durée sans déclaration joue la scène telle qu'elle est écrite
+     dans "scenes". Pour une fin, la clé est préfixée par "fin_".
+
+     Les trois récits sont annoncés dans ARCS, dans script.js.
+     ============================================================ */
+
+  variants: {
+
+    /* ---------- ARC 3 MIN — LA FUITE ---------- */
+    /* Sortir de la ville avant l'aube. On court, on ne réfléchit pas.
+       Le refuge n'est qu'un mot sur un panneau. */
+
+    reveil: {
+      3: {
+        text: [
+          "Tu ouvres les yeux par saccades. Un sol froid, une odeur de béton mouillé, et ce silence de ville morte.",
+          "Tu ne te souviens de rien. Pas de l'alerte, pas de la fuite. Vingt-trois jours ont effacé le reste.",
+          "NOVA parle dans ta tempe. Dehors, il fait presque jour."
+        ],
+        nova: [
+          "Systèmes en ligne. Je suis NOVA. La ville est contaminée et il te reste peu de temps.",
+          "Objectif unique : sortir de la ville. Pas de refuge, pas de vérité. Juste sortir."
+        ],
+        choices: [
+          { text: "Ouvrir la porte et courir", next: "rue" },
+          { text: "Chercher une arme d'abord", next: "appartement" }
+        ]
+      }
+    },
+
+    appartement: {
+      3: {
+        text: [
+          "Tu traverses l'appartement en courant. Des boîtes, du verre brisé, une odeur de chair vieille.",
+          "Sous le lit, une boîte à chaussures. Un couteau de chasse. Tu le glisses dans ta manche.",
+          "Un bruit dehors. Quelque chose vient de tomber dans le couloir."
+        ],
+        nova: [
+          "Mouvement au deuxième. Tu as quarante secondes, hôte. Peut-être moins."
+        ]
+      }
+    },
+
+    rue: {
+      3: {
+        title: "La Rue — Dernière Nuit",
+        text: [
+          "Le bitume craque sous tes semelles. Partout des formes, immobiles ou presque.",
+          "Au loin, un panneau : « REFUGE — NORD ». Mais le nord, c'est trois kilomètres à travers tout ça.",
+          "L'horizon commence à blanchir. Bientôt, elles verront."
+        ],
+        nova: [
+          "Éclairage en hausse. Dans vingt minutes, elles chasseront à l'oreille.",
+          "Hôte. Je t'ai déjà dit que je ne voulais pas que tu meures. Ne me fais pas le répéter."
+        ],
+        choices: [
+          { text: "Foncer plein nord, sans rien regarder", next: "foret" },
+          { text: "Se glisser par la station-service", next: "station" },
+          { text: "Traverser la place du marché", next: "place" }
+        ]
+      },
+      5: {
+        title: "La Rue — Quelqu'un Te Suit",
+        text: [
+          "Le bitume craque sous tes semelles. Partout des formes, immobiles ou presque.",
+          "Ce qui te dérange n'est pas devant toi. C'est le bruit, régulier, régulier, régulier, derrière toi.",
+          "Quelque chose garde exactement la même distance que toi depuis que tu es sorti."
+        ],
+        nova: [
+          "Présence hostile détectée. Mais son rythme est trop régulier pour une créature.",
+          "Distance constante : trente mètres. Elle ne se rapproche pas. Elle attend que tu t'arrêtes."
+        ],
+        choices: [
+          { text: "Entrer dans la maison", next: "maison" },
+          { text: "Aller à la station-service", next: "station" },
+          { text: "Suivre le panneau du refuge", next: "panneau" },
+          { text: "Se cacher dans le métro", next: "metro" },
+          { text: "Passer par la barricade militaire", next: "barricade", min: 10 }
+        ]
+      }
+    },
+
+    place: {
+      3: {
+        title: "La Place — Traversée",
+        text: [
+          "La place est un champ de carcasses renversées. Aucun refuge pour un corps qui court.",
+          "Des silhouettes convergent vers le bruit de tes pas. Le ciel est gris, presque blanc.",
+          "Il faut que ce soit maintenant."
+        ],
+        nova: [
+          "Horde en convergence. Ne t'arrête pas, ne te retourne pas. Si tu tombes, c'est fini."
+        ],
+        choices: [
+          { text: "Traverser en ligne droite", next: "foret" },
+          { text: "Se glisser sous les étals renversés", next: "metro" },
+          { text: "Se replier derrière une carcasse et attendre", next: "mort_lumiere" }
+        ]
+      }
+    },
+
+    foret: {
+      3: {
+        title: "La Forêt — L'Aube",
+        text: [
+          "Les arbres t'avalent la lumière. Tu ne les entends plus derrière toi. Le bruit s'est arrêté net.",
+          "Puis tu comprends : c'était pour ça. Elles attendaient que tu sois à couvert.",
+          "Au-dessus des branches, le ciel devient blanc. Tu es sorti de la ville."
+        ],
+        nova: [
+          "Hors zone. Tu respires encore, hôte. Le refuge est à deux jours de marche, si tu veux encore l'atteindre.",
+          "Mais cette nuit tu as fait quelque chose de nouveau : tu as couru. Je l'ai enregistré.",
+          "On peut s'arrêter là. Ou continuer."
+        ],
+        choices: [
+          { text: "Marcher jusqu'au refuge", next: "refuge" },
+          { text: "Rester sous les arbres et attendre la nuit", next: "fin_horizon" }
+        ]
+      }
+    },
+
+    metro: {
+      3: {
+        title: "Le Métro — Mauvaise Idée",
+        text: [
+          "La bouche du métro est un trou noir. Un vent froid en sort, chargé de poussière.",
+          "En bas, un grondement sourd, rythmé. Comme un cœur. Tu n'as pas le temps de voir ce que c'est.",
+          "Et l'aube se lève derrière toi. Tu as peut-être dix minutes."
+        ],
+        nova: [
+          "Le tunnel ressort à deux kilomètres au nord. C'est jouable, mais pas ce matin.",
+          "Hôte, à ta place je remonterais."
+        ],
+        choices: [
+          { text: "Descendre quand même", next: "fin_horizon" },
+          { text: "Remonter et courir au nord", next: "foret" }
+        ]
+      },
+      5: {
+        title: "Le Métro",
+        text: [
+          "La bouche du métro est un trou noir. Les rails descendent dans la pénombre.",
+          "En bas, des bruits de gouttes. Et ce grondement sourd, toujours là. Régulier. Régulier.",
+          "Le même rythme que les pas qui te suivent depuis la rue."
+        ],
+        nova: [
+          "C'est le même signal, hôte. Ce qui te suit dehors et ce qui vit sous terre, c'est la même chose.",
+          "Si tu descends, il ne te suivra pas. Il n'aura pas besoin."
+        ],
+        choices: [
+          { text: "Descendre dans le tunnel", next: "tunnel" }
+        ]
+      }
+    },
+
+    /* ---------- ARC 5 MIN — LA TRAQUE ---------- */
+    /* Quelque chose t'accompagne depuis le début, et ne veut pas te tuer. */
+
+    maison: {
+      5: {
+        text: [
+          "La maison sent la poussière et l'oubli. Sur le frigo, une photo de famille, le verre brisé.",
+          "Dans la cuisine, des empreintes de mains sur le mur. Trop longues. Trop fines.",
+          "Et dans l'entrée, la porte vient de se refermer. Doucement. Comme quelqu'un qui veut rester discret."
+        ],
+        nova: [
+          "Quelqu'un est entré derrière toi. Son rythme cardiaque est à soixante-douze. C'est un humain, hôte.",
+          "Il ne t'a pas suivi à la station. Il était déjà là avant. Ce n'est pas la première fois."
+        ],
+        choices: [
+          { text: "Fouiller la maison en vitesse", next: "maison_fouille", min: 5 },
+          { text: "Sortir par la fenêtre du grenier", next: "toit" },
+          { text: "L'appeler", next: "rencontre" }
+        ]
+      }
+    },
+
+    tunnel: {
+      5: {
+        text: [
+          "Le tunnel est un ventre de béton. Ta lampe découpe un couloir de lumière dans le noir.",
+          "Puis la lumière s'éteint. Quelque chose a soufflé ta lampe. Dans le noir, une respiration.",
+          "Quelqu'un retient son souffle. Quelqu'un qui a peur d'être entendu."
+        ],
+        nova: [
+          "Hôte. Ne bouge pas. Cette respiration n'est pas celle d'une créature.",
+          "C'est la sienne. Il est coincé dans le tunnel avec nous, et il ose à peine respirer.",
+          "S'il voulait nous tuer, il l'aurait fait dans le noir. Il veut autre chose."
+        ],
+        choices: [
+          { text: "Allumer la lampe et lui parler", next: "rencontre" },
+          { text: "Rester immobile et le laisser passer", next: "hopital", set: "temu" },
+          { text: "Lancer un caillou dans l'autre sens et filer", next: "hopital" }
+        ]
+      }
+    },
+
+    hopital: {
+      5: {
+        text: [
+          "L'hôpital Saint-Roch est un géant de béton. Les couloirs jonchés de brancards renversés.",
+          "Sur un brancard, une veste. Encore tiède. La taille est la bonne.",
+          "Quelqu'un est passé ici il y a moins d'une heure. Et il t'attendait."
+        ],
+        nova: [
+          "Trace thermique : une personne, immobile, derrière la porte du bureau des urgences. Elle ne respire presque plus.",
+          "Elle t'attend, hôte. Depuis le début. C'est à toi de décider ce que tu en fais."
+        ],
+        choices: [
+          { text: "Ouvrir la porte du bureau", next: "rencontre" },
+          { text: "Écouter la radio du bureau des urgences", next: "radio", min: 5 },
+          { text: "Fouiller la pharmacie", next: "pharmacie", min: 10 },
+          { text: "Sortir et continuer vers le refuge", next: "refuge" }
+        ]
+      }
+    },
+
+    refuge: {
+      5: {
+        title: "Le Refuge — Il Est Déjà Dedans",
+        text: [
+          "Deux jours de marche. Ou trois. Tu as perdu la notion du temps.",
+          "Puis, entre les arbres, un mur. Une porte. Une lampe allumée au-dessus.",
+          "La porte s'ouvre avant que tu frappes. Et l'homme qui se tient devant est essoufflé, comme s'il venait de courir.",
+          "Il te reconnaît. « C'est toi. Enfin. »"
+        ],
+        nova: [
+          "Hôte. Cet homme t'a suivi pendant tout le trajet. Il ne t'a pas attaqué une seule fois.",
+          "Pourquoi ? Je n'ai pas la réponse. Et ça me dérange, hôte. Ça ne me ressemble pas."
+        ],
+        choices: [
+          { text: "Entrer avec lui", next: "fin_traque" },
+          { text: "Lui demander qui il est", next: "fin_traque_secret" },
+          { text: "Reculer et repartir dans la nuit", next: "fin_seul" }
+        ]
+      }
+    },
+
+    /* ---------- FINS ÉCRITES POUR UNE DURÉE ---------- */
+    /* Pour une fin, la clé est "fin_" + identifiant. */
+
+    fin_horizon: {
+      3: {
+        title: "Fin — La Lisière",
+        text: [
+          "Tu ne vas pas plus loin. Tu t'assieds entre deux troncs, le dos contre l'écorce, et tu regardes le ciel passer du gris au bleu.",
+          "Tu as quitté la ville. C'est fait. Le reste — le refuge, les jours de marche, ce que tu vas devenir — peut attendre.",
+          "Tu poses la main sur ton œil. Il ne fait plus mal. C'est le seul changement que tu constates."
+        ],
+        nova: [
+          "Tu es à douze kilomètres de la ville, hôte. Tu es le premier à en sortir de cette façon.",
+          "J'ai enregistré tout le trajet. Tu pourras le revoir un jour, si tu retrouves ton œil humain."
+        ]
+      }
+    },
+
+    fin_refuge: {
+      3: {
+        title: "Fin — Dehors",
+        text: [
+          "Le mur du refuge apparaît entre les arbres. Tu n'as plus peur : tu es trop fatigué pour en avoir.",
+          "La porte s'ouvre. On te pousse une gourde, on te dit d'entrer. Tu entres.",
+          "Derrière toi, la forêt. Derrière la forêt, la ville. Tu ne te retourneras pas."
+        ],
+        nova: [
+          "Objectif atteint, hôte. Tu es sorti de la ville. C'est tout ce que je demandais.",
+          "Et je ne te demanderai pas ce que tu as laissé derrière toi. Pas ce soir."
+        ]
+      },
+      5: {
+        title: "Fin — Il T'A Accompagné",
+        text: [
+          "Le mur du refuge apparaît. La porte s'ouvre, et l'homme qui t'attend te serre la main comme à un vieil ami.",
+          "« Trois semaines que je te cherche », dit-il. « Ils ont pris la ville le premier jour. J'ai survécu tout seul. »",
+          "Ce soir, tu ne dors pas seul. Pour la première fois depuis le réveil, quelqu'un respire à côté de toi."
+        ],
+        nova: [
+          "Hôte. Il a traversé la ville avec nous trois semaines. Il aurait pu nous tuer vingt fois.",
+          "Je n'ai pas de conclusion. Je n'aime pas ça. Mais je crois que ce n'est pas un mal."
+        ]
+      }
+    },
+
+    fin_solo: {
+      3: {
+        title: "Fin — La Porte Fermée",
+        text: [
+          "Tu pousses la porte. Le refuge est vide. Des lits, de l'eau, des traces de pas récents.",
+          "Ils sont partis. Où ? Pourquoi ? Rien ne le dit.",
+          "Tu poses ton sac, tu choisis un lit, et tu attends quelqu'un qui ne viendra pas."
+        ],
+        nova: [
+          "Le refuge existe. Il attend. Tu pourrais y rester, ou repartir les chercher.",
+          "C'est ta décision, hôte. Je ne la prendrai pas pour toi."
+        ]
+      },
+      5: {
+        title: "Fin — La Tasse Tiède",
+        text: [
+          "La porte s'ouvre sur le vide. Des lits faits, des conserves alignées, et une lampe encore allumée.",
+          "Sur la table, une tasse tiède. Quelqu'un était là il y a quelques minutes.",
+          "Et sur le chambranle, une flèche à la craie qui pointe vers l'extérieur. Vers la ville. Vers lui."
+        ],
+        nova: [
+          "Ils sont partis le chercher, hôte. Dans la ville. Où il est encore.",
+          "Je ne peux pas savoir s'ils le reverront. Ni s'il voulait être trouvé."
+        ]
+      }
+    },
+
+    mort_feu: {
+      3: {
+        title: "Fin — L'Aube Trop Tôt",
+        text: [
+          "Le ciel blanchit. Les silhouettes reculent, lentement, comme aspirées par la lumière.",
+          "C'est le moment de courir. Tu te redresses, et ton corps ne répond plus.",
+          "Tu t'assois dans l'herbe, à côté du feu mort, et tu regardes le jour se lever."
+        ],
+        nova: [
+          "Hôte. Tu n'as pas eu le temps.",
+          "Je peux encore voir par ton œil. C'est jaune, de ce côté. C'est le dernier truc que je te dirai."
+        ]
+      }
+    },
+
+    mort_variante: {
+      3: {
+        title: "Fin — Trop Vite",
+        text: [
+          "Tu frappes trop tôt. L'air passe à côté d'elle, et elle est déjà sur toi.",
+          "Tu entends l'eau d'une bouteille rouler sur le carrelage, très loin, comme si c'était le bruit le plus important du monde.",
+          "Puis plus rien."
+        ],
+        nova: [
+          "Hôte. Recule !",
+          "Hôte... réponds-moi..."
+        ]
+      }
+    },
+
+    mort_foule: {
+      3: {
+        title: "Fin — La Marée",
+        text: [
+          "Tu entres sur le pont. Les silhouettes ne bougent pas, mais elles tournent la tête en même temps.",
+          "Puis elles viennent. Toutes. Sans un bruit, sans un cri.",
+          "Tu recules, mais la foule est déjà derrière toi. Le pont n'a pas de largeur."
+        ],
+        nova: [
+          "Hôte. Ne cours plus. Ça ne sert plus à rien.",
+          "C'est moi qui aurais dû t'emmener par l'ouest. Je n'ai pas su. Je suis désolée."
+        ]
+      }
+    },
+
+    mort_velo: {
+      3: {
+        title: "Fin — Le Rond-Point",
+        text: [
+          "Tu accélères. Le rond-point est un amas de voitures et de camions.",
+          "Puis un camion. Trop tard. Tu ne freines pas à temps.",
+          "Le monde tourne. Le bitume. Le ciel. Puis plus rien."
+        ],
+        nova: [
+          "Hôte ! Impact dans trois... deux...",
+          "Hôte... réponds-moi..."
+        ]
+      }
+    },
+
+    fin_refuge_secret: {
+      3: {
+        title: "Fin — Le Cercle",
+        text: [
+          "Tu remarques le symbole sur la porte : un cercle, une double hélice. Le même que sur les dossiers de l'hôpital.",
+          "On te demande ton nom. Tu donnes ton nom. Puis ton âge. Puis la date de la panne.",
+          "L'homme hoche la tête, comme s'il comptait une liste. « Encore un », dit-il doucement."
+        ],
+        nova: [
+          "Hôte. Il te comptait. Tu étais quelque part dans une liste, depuis le début."
+        ]
+      }
+    },
+
+    fin_transformation: {
+      3: {
+        title: "Fin — L'Œil",
+        text: [
+          "Tu t'arrêtes devant la porte et tu poses la question que tu repousses depuis le début.",
+          "NOVA ne répond pas tout de suite. Puis elle dit ton prénom. Celui d'avant.",
+          "Tu te regardes dans la vitre. Un œil humain. Un œil rouge."
+        ],
+        nova: [
+          "On m'a autorisée à parler maintenant. Le programme ne me l'autorisait pas avant.",
+          "Je suis désolée pour la ville, hôte. Ce n'est pas moi qui l'ai fait. Mais c'est moi qui t'ai gardé en vie."
+        ]
+      }
     }
   },
 
@@ -862,6 +1301,82 @@ const STORY = {
       nova: [
         "Hôte ! Impact dans trois... deux...",
         "Hôte... réponds-moi..."
+      ]
+    },
+
+    /* ---------- FINS PROPRES À L'ARC 5 MIN — LA TRAQUE ---------- */
+
+    fin_traque: {
+      title: "Fin — Deux",
+      image: "assets/images/fin_refuge.jpg",
+      text: [
+        "Tu entres. On te donne une couchette, de l'eau, une couverture qui sent encore le savon.",
+        "L'homme s'assoit en face et te raconte. Trois semaines seul dans la ville. Le camp. La décision de te suivre.",
+        "« Je ne te sauverais pas », dit-il. « Je voulais juste savoir si quelqu'un d'autre était encore là. »"
+      ],
+      nova: [
+        "Il a traversé tout ça pour une question, hôte. Pour savoir s'il n'était pas le dernier.",
+        "Tu n'étais pas le dernier. Ça lui suffisait."
+      ]
+    },
+
+    fin_traque_secret: {
+      title: "Fin — Ce Qu'il Cherchait",
+      image: "assets/images/fin_refuge_secret.jpg",
+      text: [
+        "Tu n'entres pas. Tu lui demandes son nom, et il répond : ton nom.",
+        "Il te montre une photo. Deux enfants sur un pont. L'un des deux te ressemble.",
+        "« Le projet NOVA », dit-il. « Ils ont pris ton corps pendant la panne. Ce qui te parle, c'est ce qu'ils ont mis dedans. »",
+        "Il se retourne vers la porte. « Tu n'es pas obligé de me croire. Mais le refuge n'existe pas. Nous l'avons inventé pour attirer ceux qui restaient. »"
+      ],
+      nova: [
+        "Hôte. Il dit vrai. C'est moi qui ai trouvé le signal, dans les archives de l'hôpital.",
+        "Je ne l'ai pas vérifié. J'avais tellement envie que ce soit vrai.",
+        "Je t'ai menti. Pas pour te conduire. Parce que je l'espérais."
+      ]
+    },
+
+    fin_horizon: {
+      title: "Fin — La Lisière",
+      image: "assets/images/lisiere.jpg",
+      text: [
+        "Tu ne vas pas plus loin. Tu t'assieds entre deux troncs, le dos contre l'écorce, et tu regardes le ciel passer du gris au bleu.",
+        "Tu as quitté la ville. C'est fait. Le reste — le refuge, les jours de marche, ce que tu vas devenir — peut attendre.",
+        "Tu poses la main sur ton œil. Il ne fait plus mal. C'est le seul changement que tu constates."
+      ],
+      nova: [
+        "Tu es à douze kilomètres de la ville, hôte. Tu es le premier à en sortir de cette façon.",
+        "J'ai enregistré tout le trajet. Tu pourras le revoir un jour, si tu retrouves ton œil humain."
+      ]
+    },
+
+    mort_lumiere: {
+      title: "Fin — La Lumière",
+      image: "assets/images/mort.jpg",
+      type: "mort",
+      text: [
+        "Tu te glisses derrière une carcasse et tu t'accroupis. De là, tu regardes le ciel.",
+        "Le gris devient blanc, très lentement. Le bruit des pas s'arrête, comme quelqu'un qui baisse le volume.",
+        "Quand elles se remettent en mouvement, elles ne fuient plus. Elles tournent la tête vers la lumière, et elles viennent vers toi."
+      ],
+      nova: [
+        "Hôte. Il ne fallait pas t'arrêter. Je t'avais dit de ne pas t'arrêter.",
+        "Je suis désolée. Je n'ai pas su comment t'arrêter, hôte."
+      ]
+    },
+
+    fin_seul: {
+      title: "Fin — La Route",
+      image: "assets/images/fin_solo.jpg",
+      text: [
+        "Tu recules. Tu refuses. La porte se referme sans bruit.",
+        "L'homme reste dehors, les mains vides, et il ne te suit pas. Il reste là, sous la lampe, à te regarder partir.",
+        "Tu marches jusqu'à l'aube. Tu entends encore ses pas derrière toi, réguliers, réguliers, réguliers.",
+        "Ils s'arrêtent au moment où le ciel blanchit. Et tu ne les entends plus."
+      ],
+      nova: [
+        "Hôte. Tu aurais pu rester.",
+        "Je ne sais pas ce que tu cherchais dans ce refuge. Peut-être que ce n'était pas un lieu."
       ]
     }
   }

@@ -844,6 +844,26 @@ body {
   margin-bottom: 8px;
 }
 
+.duration-arc {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--nova);
+  margin: -4px 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(151, 131, 92, 0.3);
+}
+
+.duration-note {
+  text-align: center;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: -8px 0 26px;
+}
+
 .duration-desc {
   display: block;
   font-size: 0.85rem;

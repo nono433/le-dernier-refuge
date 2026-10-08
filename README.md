@@ -16,21 +16,24 @@ Au réveil, vous ne vous souvenez de rien : pas l'alerte, pas la fuite, pas la p
 
 À chaque page, vous choisissez. Vos choix modifient votre parcours, débloquent des répliques de NOVA et ouvrent des chemins que d'autres parcours ne verront jamais.
 
-### Durée au choix
+### Trois récits distincts
 
-| Durée   | Description                      | Scènes   |
-| ------- | -------------------------------- | -------- |
-| 3 min   | Histoire courte et intense       | 6 à 8    |
-| 5 min   | Aventure plus développée         | 10 à 12  |
-| 10 min  | L'expérience complète            | 18 à 22  |
+Chaque durée est une histoire différente, avec ses propres scènes, ses propres fins et son propre ton. Tu ne rejoueras pas la même chose.
+
+| Durée | Récit | Thème | Scènes | Fins |
+| ----- | ----- | ----- | ------ | ---- |
+| 3 min | **La Fuite** | Sortir de la ville avant l'aube. On court, on ne réfléchit pas. | 12 | 6 |
+| 5 min | **La Traque** | Quelque chose t'accompagne depuis le début, et ne veut pas te tuer. | 19 | 6 |
+| 10 min | **La Vérité** | Dix minutes pour découvrir ce que tu es vraiment. | 39 | 8 |
 
 ### Ce qui vous attend
 
 - **39 scènes** illustrées, du trottoir à la lisière de la forêt
-- **8 fins** — dont **4 morts** et **4 issues** aux tons très différents
+- **11 fins** — dont **5 morts** et **6 issues** aux tons très différents
 - Des **drapeaux narratifs** : ce que vous découvrez change ce que NOVA vous dit
 - Des **choix conditionnels** : certains ne s'affichent qu'en mode 10 minutes, ou après avoir trouvé un objet
 - **2 mini-jeux de réflexes et de tir**, où votre score décide de la suite de l'histoire
+- **3 arcs narratifs** : chaque durée réécrit le texte des scènes qu'elle partage avec les autres
 
 ---
 
@@ -151,6 +154,28 @@ ma_scene: {
 ### Et les fins ?
 
 Une fin est une entrée de `STORY.endings` au lieu de `STORY.scenes`, avec un `text` et une illustration. Ajoutez `"type": "mort"` pour déclencher l'écran de fin rouge.
+
+### Les trois récits
+
+Chaque durée est une histoire différente. Plutôt que de dupliquer les scènes trois fois, le moteur lit un bloc `variants` dans `data/story.js` : chaque durée peut surcharger le texte, les répliques de NOVA, le titre, les choix ou la redirection d'une scène existante.
+
+```js
+variants: {
+  "rue": {
+    3:  { text: [...], choices: [...] },   // version 3 minutes
+    5:  { nova: [...] },                    // version 5 minutes
+    10: { choices: [...] }                  // ou rien : version par défaut
+  },
+  "fin_refuge": {
+    3:  { title: "Fin — Dehors", text: [...], nova: [...] },
+    5:  { title: "Fin — Il T'A Accompagné", text: [...], nova: [...] }
+  }
+}
+```
+
+Une durée sans déclaration joue la scène telle qu'elle est écrite dans `scenes`. Pour une fin, la clé est préfixée par `fin_`.
+
+Les trois arcs sont annoncés dans `ARCS` (dans `script.js`) : **La Fuite** (3 min), **La Traque** (5 min), **La Vérité** (10 min).
 
 ---
 
