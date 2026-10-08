@@ -4,6 +4,10 @@ __pycache__/
 .venv/
 venv/
 
+# Node (tests du moteur : jsdom)
+node_modules/
+package-lock.json
+
 # Outillage / OS
 .vscode/
 .idea/

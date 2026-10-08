@@ -24,13 +24,13 @@ Au réveil, vous ne vous souvenez de rien : pas l'alerte, pas la fuite, pas la p
 | 5 min   | Aventure plus développée         | 10 à 12  |
 | 10 min  | L'expérience complète            | 18 à 22  |
 
-
 ### Ce qui vous attend
 
 - **39 scènes** illustrées, du trottoir à la lisière de la forêt
-- **6 fins** — dont **2 morts** et **4 issues** aux tons très différents
-- Des **drapeaux narratifs** : ce que vous découvre change ce que NOVA vous dit
+- **8 fins** — dont **4 morts** et **4 issues** aux tons très différents
+- Des **drapeaux narratifs** : ce que vous découvrez change ce que NOVA vous dit
 - Des **choix conditionnels** : certains ne s'affichent qu'en mode 10 minutes, ou après avoir trouvé un objet
+- **2 mini-jeux de réflexes et de tir**, où votre score décide de la suite de l'histoire
 
 ---
 
@@ -58,6 +58,56 @@ python -m http.server 8000
 ### Raccourcis clavier
 
 Les choix sont numérotés : **appuyez sur `1`, `2`, `3`…** pour faire avancer l'histoire sans toucher la souris.
+
+---
+
+## Les mini-jeux
+
+Deux scènes ne proposent pas des choix mais un **jeu de réflexes et de tir**. Des silhouettes sortent de l'ombre et avancent vers le feu : il faut les abattre avant qu'elles n'arrivent.
+
+| Scène        | Situation                            | Silhouettes | Cartouches |
+| ------------ | ------------------------------------- | ----------- | ---------- |
+| Le Campement | Tenir la feuillée jusqu'à l'aube      | 10          | 10         |
+| La Boutique  | Frapper la variante avant qu'elle bondisse | 3        | 3          |
+
+Le résultat change l'histoire : la réussite ouvre une voie, l'échec mène à une fin.
+
+| Jeu            | Réussite                      | Échec               |
+| -------------- | ----------------------------- | ------------------- |
+| Le Campement   | Le Refuge (`sentier` posé)   | Fin — Le Feu Éteint |
+| La Boutique    | Le Vélo (`chevalier` posé)    | Fin — La Variante   |
+
+**Pour jouer** : viser et tirer à la souris ou au doigt. Au clavier, les flèches ou `ZQSD` déplacent le viseur et `Espace` tire. Le décor est l'illustration de la scène elle-même : aucun fichier image supplémentaire n'est nécessaire.
+
+### Écrire un mini-jeu
+
+Ajoutez un bloc `game` à n'importe quelle scène. Les choix habituels restent accessibles : le joueur peut passer son chemin.
+
+```js
+ma_scene: {
+  title: "Le Titre",
+  image: "assets/images/ma_scene.jpg",
+  text: ["..."],
+  nova: ["..."],
+  choices: [{ text: "Fuir sans se retourner", next: "rue" }],
+  game: {
+    action: "Tenir la position",     // libellé du bouton
+    image: "assets/images/ma_scene.jpg",  // décor du jeu
+    title: "Veillée",
+    brief: "Ce que le joueur doit faire.",
+    ammo: 10,          // cartouches disponibles
+    total: 10,         // silhouettes à abattre
+    spawnDelay: 2300,  // intervalle moyen d'apparition (ms)
+    travel: 7600,      // durée moyenne de traversée (ms)
+    win:  { title, text, nova, next: "refuge", set: "sentier" },
+    lose: { title, text, nova, next: "mort_feu" }
+  }
+}
+```
+
+`next` et `set` de `win` et `lose` se comportent comme ceux d'un choix : une scène de jeu peut donc mener vers une autre scène, une fin, ou poser un drapeau. Astuce : gardez `ammo` supérieur ou égal à `total` pour que le joueur ne puisse pas perdre par maladresse.
+
+Le moteur ménage le joueur : il respecte `prefers-reduced-motion`, autorise le jeu au clavier seul, et se démonte proprement si le joueur change de page en plein jeu. Un filet de sécurité garantit qu'une partie se termine toujours, même si la cible finit par arriver.
 
 ---
 
@@ -110,12 +160,14 @@ Une fin est une entrée de `STORY.endings` au lieu de `STORY.scenes`, avec un `t
 le-dernier-refuge/
 ├── index.html              Point d'entrée
 ├── style.css               Styles, animations, arrière-plan cendres
+├── minigame.css            Styles du mini-jeu (scène sombre, viseur)
 ├── script.js               Moteur du jeu (rendu, choix, transitions)
+├── minigame.js             Moteur du mini-jeu de reflexes / tir
 ├── data/
-│   └── story.js            L'histoire : scènes et fins
+│   └── story.js            L'histoire : scènes, fins et mini-jeux
 ├── assets/
 │   └── images/             45 illustrations JPEG + versions SVG
-└── tools/                  Scripts de génération et de contrôle qualité
+└── tools/                  Génération d'images et contrôles qualité
 ```
 
 ## Les illustrations
@@ -143,13 +195,37 @@ python tools/update_paths.py
 
 ---
 
+## Contrôles qualité
+
+### L'histoire
+
+Vérifie que rien n'est cassé avant de publier : cibles pointant dans le vide, images manquantes, branches incomplètes, scènes inaccessibles, images orphelines.
+
+```bash
+python tools/qa_story.py
+```
+
+`node` est nécessaire pour lire `data/story.js`. Le script se termine avec le code 1 en cas de problème bloquant, ce qui permet de l'utiliser en intégration continue.
+
+### Le moteur et le mini-jeu
+
+```bash
+npm install --no-save jsdom   # une fois, pour les tests
+node tools/qa_engine.js       # affichage, tir, nettoyage, routage, verrou de page
+node tools/qa_play.js         # parties complètes : victoire et échec
+```
+
+Ces deux scripts font tourner le vrai moteur dans un DOM simulé. `qa_play.js` joue une partie entière en abattant tout, et une autre en ne tiring jamais : il vérifie que la boucle se termine dans les deux cas et que le joueur n'arrive jamais sur un écran bloqué.
+
+---
+
 ## Compatibilité
 
 Navigateurs modernes uniquement. Aucune installation nécessaire — le livre ne charge que sa police.
 
-- `prefers-reduced-motion` est respecté : les animations s'activent
-- Fonctionne au clavier
-- Responsive : l'interface s'adapte au mobile
+- `prefers-reduced-motion` est respecté, y compris dans le mini-jeu
+- Fonctionne au clavier, jeu compris (flèches ou `ZQSD` pour viser, `Espace` pour tirer)
+- Responsive : l'interface s'adapte au mobile, le jeu se joue au doigt
 
 ---
 

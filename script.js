@@ -46,10 +46,20 @@ function spawnEmbers() {
 
 /* ---------- Utilitaires ---------- */
 
-/* Voile de transition : la page « s'éteint » puis la suivante apparaît */
+/* Voile de transition : la page « s'éteint » puis la suivante apparaît.
+
+   Un verrou empêche deux tours de page de s'empiler : sans lui, un
+   double-clic (ou deux touches de choice enfoncées ensemble) déclencherait
+   deux rendus successifs, et le compteur de pages sauterait d'un coup. */
+let turning = false;
+
 function turnPage(render) {
+  if (turning) return;
+  turning = true;
+
   if (REDUCED_MOTION) {
     render();
+    turning = false;
     return;
   }
 
@@ -61,6 +71,7 @@ function turnPage(render) {
     render();
     veil.classList.add("out");
     setTimeout(() => veil.remove(), 450);
+    turning = false;
   }, 260);
 }
 
@@ -77,6 +88,7 @@ function toArray(value) {
 /* ---------- Écran : menu ---------- */
 
 function showMenu() {
+  MiniGame.shutdown();
   currentChoices = [];
   app.innerHTML = `
     <div class="screen menu-screen">
@@ -136,6 +148,7 @@ function startAdventure(min) {
 /* ---------- Écran : scène ---------- */
 
 function showScene(id) {
+  MiniGame.shutdown();
   const scene = STORY.scenes[id];
   if (!scene) {
     showMenu();
@@ -199,24 +212,92 @@ function showScene(id) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+/* ---------- Scène de mini-jeu : réflexes / tir ----------
+   Remplace la liste de choix par un bouton qui lance le jeu.
+   Le résultat (réussite ou échec) envoie vers une autre scène
+   et peut poser un drapeau.                                      */
+
+function showGame(id) {
+  const scene = STORY.scenes[id];
+  if (!scene || !scene.game) {
+    showScene(id);
+    return;
+  }
+
+  page++;
+  currentChoices = []; // aucun choix numérique pendant le jeu
+
+  const estimated = ESTIMATED_PAGES[duration] || 23;
+  const progress = Math.min(100, Math.round((page / estimated) * 100));
+
+  app.innerHTML = `
+    <div class="screen scene-screen">
+      <div class="page-header">
+        <span class="page-chapter">${scene.title}</span>
+        <span class="nova-status"><span class="nova-dot"></span>NOVA</span>
+        <span class="page-number">Page ${page}</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width: ${progress}%"></div></div>
+      <div class="scene-image">
+        <img src="${scene.image}" alt="Illustration : ${scene.title}">
+      </div>
+      <div class="scene-text">
+        ${scene.text.map((p) => `<p>${p}</p>`).join("")}
+        ${toArray(scene.nova)
+          .map((l) => `<p class="nova-line"><span class="nova-marker">◈ NOVA</span>${l}</p>`)
+          .join("")}
+      </div>
+      <div class="choices">
+        <p class="choices-label">Que fais-tu ?</p>
+        <button class="choice-btn" id="btn-game">
+          <span class="choice-num">◈</span>
+          <span class="choice-text">${scene.game.action}</span>
+        </button>
+      </div>
+    </div>`;
+
+  document.getElementById("btn-game").addEventListener("click", () => {
+    turnPage(() => launchGame(scene));
+  });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function launchGame(scene) {
+  const game = scene.game;
+
+  MiniGame.run(game, (won) => {
+    const branch = won ? game.win : game.lose;
+
+    if (branch.set) flags[branch.set] = true;
+
+    turnPage(() => go(branch.next));
+  });
+}
+
+/* Aiguille vers la bonne écran selon la cible : scène de jeu,
+   scène normale, ou fin. */
+function go(id) {
+  const scene = STORY.scenes[id];
+
+  if (scene && scene.game) showGame(id);
+  else if (scene) showScene(id);
+  else showEnding(id);
+}
+
 /* ---------- Choix du joueur ---------- */
 
 function choose(choice) {
   if (!choice) return;
   if (choice.set) flags[choice.set] = true;
 
-  turnPage(() => {
-    if (STORY.scenes[choice.next]) {
-      showScene(choice.next);
-    } else {
-      showEnding(choice.next);
-    }
-  });
+  turnPage(() => go(choice.next));
 }
 
 /* ---------- Écran : fin ---------- */
 
 function showEnding(id) {
+  MiniGame.shutdown();
   const ending = STORY.endings[id];
   if (!ending) {
     showMenu();

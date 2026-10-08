@@ -192,14 +192,39 @@ const STORY = {
       text: [
         "Tu avances entre les rayons. Des barres de céréales, de l'eau en bouteille. Tu remplis tes poches.",
         "Puis tu la vois. Une créature maigre, trop rapide, trop agile. Ses yeux sont blancs. Elle te voit.",
-        "Elle bondit. Tu roules sous un rayon et tu sors par la porte arrière. Elle ne te suit pas. Pas cette fois."
+        "Elle bondit."
       ],
       nova: [
-        "Alerte. Variante détectée. Vitesse élevée. Ne cours pas en ligne droite. Utilise l'environnement."
+        "Alerte. Variante détectée. Vitesse élevée. Ne cours pas en ligne droite. Utilise l'environnement.",
+        "Elle franchit six mètres en une seconde et demie. Tu n'as pas le temps de réfléchir, seulement de réagir.",
+        "Je calcule sa trajectoire. Frappe au bon moment."
       ],
       choices: [
         { text: "Reprendre le vélo", next: "velo" }
-      ]
+      ],
+      game: {
+        action: "Frapper au bon moment",
+        image: "assets/images/boutique.jpg",
+        title: "La Variante",
+        brief: "Elle est plus rapide que tu ne l'imaginais. Peu de cibles, peu de cartouches, aucun droit à l'erreur.",
+        ammo: 3,
+        total: 3,
+        spawnDelay: 2600,
+        travel: 3400,
+        win: {
+          title: "Elle tombe",
+          text: "Tu frappes au bon moment. Elle recule de deux pas, tombe, et ne se relève pas. Le silence revient dans les rayons.",
+          nova: "Trajectoire confirmée. Tu as frappé exactement là où je l'avais prédit. Je note l'événement.",
+          next: "velo",
+          set: "chevalier"
+        },
+        lose: {
+          title: "Trop tard",
+          text: "Tu frappes dans le vide. Elle est déjà sur toi.",
+          nova: "Trop tôt. Ce n'était pas le moment, hôte.",
+          next: "mort_variante"
+        }
+      }
     },
 
     velo: {
@@ -561,15 +586,40 @@ const STORY = {
       image: "assets/images/campement.jpg",
       text: [
         "Tu allumes un petit feu. La nuit tombe, et avec elle, les bruits. Des pas. Des souffles. Des chuchotements.",
+        "Contre le tronc, un fusil de chasse et une boîte de cartouches. La dernière chose que son propriétaire a posée en partant. Tu n'as jamais tiré de ta vie. Ton index se crispe quand même.",
         "Dans l'obscurité, deux paires d'yeux rouges. Elles t'observent. Elles attendent."
       ],
       nova: [
         "Alerte. Plusieurs approches. Elles t'ont suivi. Conseil : ne dors pas. Pas cette nuit. Tiens-toi près du feu.",
-        "L'aube arrive enfin. Les créatures se retirent. Tu es épuisé, mais vivant."
+        "Détection thermique : quatorze présences dans un rayon de trente mètres. Certaines le font exprès. C'est le moment de le prouver.",
+        "Hôte. Je peux compter avec toi, mais je ne peux pas tirer à ta place. Chaque balle compte."
       ],
       choices: [
         { text: "Reprendre le sentier vers le refuge", next: "refuge", set: "sentier" }
-      ]
+      ],
+      game: {
+        action: "Tenir le feu jusqu'à l'aube",
+        image: "assets/images/campement.jpg",
+        title: "Veillée",
+        brief: "Le feu les tient à distance. Chaque silhouette qui franchit la lumière est la dernière chose que tu verras cette nuit.",
+        ammo: 10,
+        total: 10,
+        spawnDelay: 2300,
+        travel: 7600,
+        win: {
+          title: "L'aube se lève",
+          text: "La dernière silhouette retombe dans l'herbe. Le ciel passe du noir au gris. Elles se retirent, comme si la lumière les repoussait.",
+          nova: "Elles ont reculé. Tu as tenu, hôte. Et tu tiens toujours debout. C'est la seconde fois cette nuit que ça me surprend.",
+          next: "refuge",
+          set: "sentier"
+        },
+        lose: {
+          title: "Le feu s'éteint",
+          text: "Une main sort de l'ombre, et tu n'as pas été assez vite.",
+          nova: "Hôte. Je suis encore là. Je suis encore là. Reste avec moi.",
+          next: "mort_feu"
+        }
+      }
     },
 
     riviere: {
@@ -767,6 +817,36 @@ const STORY = {
       nova: [
         "Hôte... hôte, réponds-moi...",
         "La dernière chose que tu entends, c'est ma voix qui s'éteint avec tes systèmes."
+      ]
+    },
+
+    mort_variante: {
+      title: "Fin — La Variante",
+      image: "assets/images/mort.jpg",
+      type: "mort",
+      text: [
+        "Tu frappes trop tôt. Ton couteau passe dans l'air, et l'air est tout ce qu'il te reste.",
+        "Elle te jette au sol entre deux rayons. Tes doigts lâchent le couteau. Tu entends l'eau d'une bouteille rouler sur le carrelage.",
+        "Puis plus rien."
+      ],
+      nova: [
+        "Hôte. Recule. Recule !",
+        "Hôte... réponds-moi..."
+      ]
+    },
+
+    mort_feu: {
+      title: "Fin — Le Feu Éteint",
+      image: "assets/images/mort.jpg",
+      type: "mort",
+      text: [
+        "Le feu bascule et s'étouffe dans l'herbe humide. Le noir se referme sur le campement.",
+        "Tu tires encore, dans le vide, vers des formes que tu ne vois plus. Le fusil claque. Puis plus rien.",
+        "Le dernier son que tu entends est un craquement de branche, à quelques mètres."
+      ],
+      nova: [
+        "Hôte ?",
+        "Hôte, réponds-moi..."
       ]
     },
 
