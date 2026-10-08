@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Veillée — cinématique</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #e8dcc0;
+    --nova: #4f9aaa;
+    --accent: #7c2d20;
+    --fire: #e2661f;
+  }
+
+  html, body {
+    height: 100%;
+    background: #05070a;
+    overflow: hidden;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  /* ---------- La scène ---------- */
+
+  .scene {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(180deg, #060a12 0%, #0a1220 45%, #0d1418 70%, #0a0f0c 100%);
+  }
+
+  /* ---------- Ciel ---------- */
+
+  .stars {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: #cfd8e8;
+    opacity: 0.7;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.25; }
+    50%      { opacity: 0.9; }
+  }
+
+  .moon {
+    position: absolute;
+    top: 9%;
+    right: 12%;
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 34%, #f2ecd8 0%, #cfc6a8 55%, #a89f80 100%);
+    box-shadow: 0 0 60px 18px rgba(220, 214, 180, 0.16);
+    z-index: 1;
+  }
+
+  .moon::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle 9px at 62% 30%, rgba(120, 112, 88, 0.5) 0%, transparent 100%),
+      radial-gradient(circle 6px at 30% 62%, rgba(120, 112, 88, 0.45) 0%, transparent 100%),
+      radial-gradient(circle 5px at 70% 66%, rgba(120, 112, 88, 0.4) 0%, transparent 100%);
+  }
+
+  /* ---------- Sol ---------- */
+
+  .ground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 34%;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, rgba(38, 44, 30, 0.9) 0%, transparent 70%),
+      linear-gradient(180deg, #131a12 0%, #0b100a 60%, #070a06 100%);
+    z-index: 2;
+  }
+
+  .ground::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 46px, rgba(20, 28, 16, 0.6) 46px 48px),
+      repeating-linear-gradient(0deg, transparent 0 22px, rgba(16, 22, 12, 0.5) 22px 24px);
+    opacity: 0.5;
+  }
+
+  /* ---------- Le feu de camp ---------- */
+
+  .fire {
+    position: absolute;
+    left: 26%;
+    bottom: 26%;
+    width: 130px;
+    height: 130px;
+    z-index: 4;
+  }
+
+  .fire-glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 340px;
+    height: 340px;
+    margin: -170px 0 0 -170px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 150, 60, 0.22) 0%, rgba(220, 90, 30, 0.1) 40%, transparent 70%);
+    animation: glow-pulse 1.6s ease-in-out infinite;
+    z-index: -1;
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { transform: scale(1);    opacity: 0.85; }
+    50%      { transform: scale(1.12); opacity: 1; }
+  }
+
+  .logs {
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    width: 96px;
+    height: 22px;
+    margin-left: -48px;
+  }
+
+  .log {
+    position: absolute;
+    bottom: 0;
+    width: 92px;
+    height: 13px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #4a3421 0%, #2c1e12 100%);
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.6);
+  }
+
+  .log:nth-child(1) { transform: rotate(-14deg); left: 0; }
+  .log:nth-child(2) { transform: rotate(11deg);  left: 4px; bottom: 4px; }
+  .log:nth-child(3) { transform: rotate(2deg);   left: 2px;  bottom: 8px; width: 84px; }
+
+  .flame {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    border-radius: 50% 50% 46% 46% / 62% 62% 38% 38%;
+    transform-origin: 50% 100%;
+    animation: flicker 0.9s ease-in-out infinite alternate;
+  }
+
+  .flame-1 {
+    width: 46px;
+    height: 74px;
+    margin-left: -23px;
+    background: linear-gradient(180deg, #fff3c0 0%, #ffc44d 34%, #f07a1e 68%, #b83a0e 100%);
+    filter: blur(0.4px);
+    z-index: 3;
+  }
+
+  .flame-2 {
+    width: 30px;
+    height: 52px;
+    margin-left: -15px;
+    background: linear-gradient(180deg, #fff8d8 0%, #ffd970 40%, #ff8c2a 100%);
+    animation-duration: 0.62s;
+    animation-delay: 0.12s;
+    z-index: 4;
+  }
+
+  .flame-3 {
+    width: 16px;
+    height: 30px;
+    margin-left: -8px;
+    background: linear-gradient(180deg, #ffffff 0%, #ffe9a8 55%, #ffb03a 100%);
+    animation-duration: 0.45s;
+    animation-delay: 0.24s;
+    z-index: 5;
+  }
+
+  @keyframes flicker {
+    0%   { transform: scaleY(1)    scaleX(1)    rotate(-1.5deg); }
+    35%  { transform: scaleY(1.09) scaleX(0.94) rotate(1.8deg); }
+    70%  { transform: scaleY(0.95) scaleX(1.05) rotate(-1deg); }
+    100% { transform: scaleY(1.05) scaleX(0.97) rotate(1.2deg); }
+  }
+
+  .ember {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #ffb03a;
+    box-shadow: 0 0 6px 2px rgba(255, 150, 50, 0.7);
+    animation: rise 2.6s linear infinite;
+    z-index: 6;
+  }
+
+  @keyframes rise {
+    0%   { transform: translate(0, 0) scale(1);        opacity: 0; }
+    12%  { opacity: 1; }
+    100% { transform: translate(var(--dx, 10px), -190px) scale(0.2); opacity: 0; }
+  }
+
+  /* ---------- Le héros cybernétique ---------- */
+
+  .hero {
+    position: absolute;
+    left: 37%;
+    bottom: 24%;
+    width: 120px;
+    height: 240px;
+    z-index: 5;
+  }
+
+  .hero-body {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* jambes */
+  .leg {
+    position: absolute;
+    bottom: 0;
+    width: 20px;
+    height: 96px;
+    border-radius: 8px 8px 4px 4px;
+    background: linear-gradient(180deg, #1a2027 0%, #0e1318 100%);
+  }
+
+  .leg-l { left: 34px; }
+  .leg-r { left: 62px; }
+
+  /* torse */
+  .torso {
+    position: absolute;
+    bottom: 88px;
+    left: 26px;
+    width: 62px;
+    height: 96px;
+    border-radius: 22px 22px 12px 12px;
+    background: linear-gradient(180deg, #232b34 0%, #141a20 70%, #0d1216 100%);
+    box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.7);
+  }
+
+  /* tête */
+  .head {
+    position: absolute;
+    bottom: 176px;
+    left: 38px;
+    width: 40px;
+    height: 46px;
+    border-radius: 46% 46% 42% 42% / 40% 40% 30% 30%;
+    background: linear-gradient(180deg, #2a333d 0%, #161d24 100%);
+  }
+
+  /* l'œil cybernétique */
+  .eye {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    width: 22px;
+    height: 7px;
+    margin-left: -11px;
+    border-radius: 50%;
+    background: radial-gradient(circle 3px at 5px 3px, #ff6a4a 0%, rgba(255, 60, 40, 0) 100%);
+    filter: drop-shadow(0 0 6px rgba(255, 70, 45, 0.95));
+    animation: eye-scan 2.4s ease-in-out infinite;
+  }
+
+  @keyframes eye-scan {
+    0%, 100% { transform: translateX(-3px); }
+    50%      { transform: translateX(3px); }
+  }
+
+  /* lignes cybernétiques sur le bras */
+  .cyber-line {
+    position: absolute;
+    background: var(--nova);
+    box-shadow: 0 0 6px 1px rgba(79, 154, 170, 0.8);
+    opacity: 0.85;
+  }
+
+  .cyber-arm {
+    position: absolute;
+    bottom: 104px;
+    left: 76px;
+    width: 58px;
+    height: 13px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #2b343e 0%, #171e25 100%);
+    transform: rotate(-16deg);
+    transform-origin: 0 50%;
+  }
+
+  .cyber-arm::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    top: 5px;
+    height: 2px;
+    background: var(--nova);
+    box-shadow: 0 0 7px 1px rgba(79, 154, 170, 0.9);
+  }
+
+  .cyber-torso {
+    position: absolute;
+    bottom: 118px;
+    left: 40px;
+    width: 3px;
+    height: 44px;
+    background: linear-gradient(180deg, transparent, var(--nova) 30%, var(--nova) 70%, transparent);
+    box-shadow: 0 0 6px 1px rgba(79, 154, 170, 0.7);
+    opacity: 0.7;
+  }
+
+  /* le fusil */
+  .rifle {
+    position: absolute;
+    bottom: 112px;
+    left: 104px;
+    width: 74px;
+    height: 9px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #3a454f 0%, #1c232a 100%);
+    transform: rotate(-16deg);
+    transform-origin: 0 50%;
+    z-index: 6;
+  }
+
+  .rifle::before {
+    content: "";
+    position: absolute;
+    right: -14px;
+    top: 2px;
+    width: 16px;
+    height: 5px;
+    border-radius: 2px;
+    background: #10151a;
+  }
+
+  .rifle::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: -5px;
+    width: 22px;
+    height: 4px;
+    border-radius: 2px;
+    background: #232b33;
+  }
+
+  /* flash de bouche du fusil */
+  .muzzle {
+    position: absolute;
+    bottom: 118px;
+    left: 176px;
+    width: 26px;
+    height: 26px;
+    margin-left: -13px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff8dc 0%, #ffd257 35%, rgba(255, 140, 40, 0) 72%);
+    opacity: 0;
+    z-index: 7;
+  }
+
+  .muzzle.go { animation: flash 0.13s ease-out; }
+
+  @keyframes flash {
+    0%   { opacity: 1; transform: scale(0.5); }
+    100% { opacity: 0; transform: scale(1.5); }
+  }
+
+  /* traçante */
+  .tracer {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 226, 170, 0.95), rgba(255, 226, 170, 0));
+    transform-origin: 0 50%;
+    opacity: 0;
+    z-index: 6;
+  }
+
+  .tracer.go { animation: trace 0.16s ease-out; }
+
+  @keyframes trace {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* ---------- Les ombres ---------- */
+
+  .shadow {
+    position: absolute;
+    bottom: 22%;
+    width: 56px;
+    height: 118px;
+    z-index: 4;
+    opacity: 0;
+  }
+
+  .shadow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 46% 46% 34% 34% / 38% 38% 22% 22%;
+    background: linear-gradient(180deg, #07090c 0%, #10141a 60%, #05070a 100%);
+    box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.95);
+  }
+
+  .shadow::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    width: 22px;
+    height: 7px;
+    margin-left: -11px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle 3px at 4px 3px, #ff6a4a 0%, rgba(255, 60, 40, 0) 100%),
+      radial-gradient(circle 3px at 18px 3px, #ff6a4a 0%, rgba(255, 60, 40, 0) 100%);
+    filter: drop-shadow(0 0 5px rgba(255, 70, 45, 0.9));
+  }
+
+  .shadow.approach { animation: approach var(--walk, 7s) linear forwards; }
+
+  @keyframes approach {
+    0%   { opacity: 0; transform: translateX(0) scale(0.85); }
+    8%   { opacity: 1; }
+    100% { opacity: 1; transform: translateX(var(--tx, -260px)) scale(1); }
+  }
+
+  .shadow.dying {
+    animation: fall 0.5s ease-in forwards;
+  }
+
+  @keyframes fall {
+    0%   { opacity: 1; transform: translateX(var(--tx, -260px)) scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: translateX(var(--tx, -260px)) scale(1.15) rotate(74deg); }
+  }
+
+  /* ---------- Interface ---------- */
+
+  .hud {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 22px 28px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  .hud-title {
+    color: var(--ink);
+    font-size: 0.95rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  .hud-title strong {
+    display: block;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    color: #f4ecda;
+    margin-bottom: 4px;
+  }
+
+  .hud-hint {
+    color: #8d94a0;
+    font-size: 0.8rem;
+    font-style: italic;
+    text-align: right;
+    max-width: 300px;
+  }
+
+  .replay {
+    pointer-events: auto;
+    margin-top: 10px;
+    font-family: Georgia, serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: rgba(124, 45, 32, 0.3);
+    border: 1px solid var(--accent);
+    padding: 9px 18px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .replay:hover { background: rgba(124, 45, 32, 0.55); }
+
+  .vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 50% 55%, transparent 42%, rgba(0, 0, 0, 0.72) 100%);
+    z-index: 15;
+  }
+</style>
+</head>
+<body>
+
+<div class="scene" id="scene">
+  <div class="stars" id="stars"></div>
+  <div class="moon"></div>
+  <div class="ground"></div>
+
+  <div class="fire">
+    <div class="fire-glow"></div>
+    <div class="logs">
+      <div class="log"></div>
+      <div class="log"></div>
+      <div class="log"></div>
+    </div>
+    <div class="flame flame-1"></div>
+    <div class="flame flame-2"></div>
+    <div class="flame flame-3"></div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-body">
+      <div class="leg leg-l"></div>
+      <div class="leg leg-r"></div>
+      <div class="torso"></div>
+      <div class="cyber-torso"></div>
+      <div class="head"><div class="eye"></div></div>
+      <div class="cyber-arm"></div>
+      <div class="rifle"></div>
+      <div class="muzzle" id="muzzle"></div>
+    </div>
+  </div>
+
+  <div class="vignette"></div>
+
+  <div class="hud">
+    <div class="hud-title">
+      <strong>La Veillée</strong>
+      Le Dernier Refuge
+    </div>
+    <div>
+      <div class="hud-hint">Ils sortent de l'ombre tant que le feu tient.</div>
+      <button class="replay" id="replay">Rejouer la scène</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ============================================================
+     La Veillée — cinématique du mini-jeu
+     Un homme cybernétique tient le feu de camp pendant que des
+     ombres convergent. Il tire sur chacune avant qu'elle n'arrive.
+     ============================================================ */
+
+  const scene = document.getElementById("scene");
+  const muzzle = document.getElementById("muzzle");
+  const replayBtn = document.getElementById("replay");
+
+  const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Étoiles ---------- */
+
+  function buildStars() {
+    const host = document.getElementById("stars");
+    host.innerHTML = "";
+    for (let i = 0; i < 90; i++) {
+      const s = document.createElement("div");
+      s.className = "star";
+      s.style.left = Math.random() * 100 + "%";
+      s.style.top = Math.random() * 55 + "%";
+      s.style.animationDelay = (Math.random() * 3).toFixed(2) + "s";
+      s.style.animationDuration = (2 + Math.random() * 3).toFixed(2) + "s";
+      if (Math.random() > 0.82) s.style.width = s.style.height = "3px";
+      host.appendChild(s);
+    }
+  }
+
+  /* ---------- Braises ---------- */
+
+  function buildEmbers() {
+    const fire = document.querySelector(".fire");
+    for (let i = 0; i < 7; i++) {
+      const e = document.createElement("div");
+      e.className = "ember";
+      e.style.left = (44 + Math.random() * 14) + "%";
+      e.style.bottom = "20px";
+      e.style.setProperty("--dx", (Math.random() * 70 - 35).toFixed(0) + "px");
+      e.style.animationDelay = (Math.random() * 2.6).toFixed(2) + "s";
+      e.style.animationDuration = (2 + Math.random() * 1.6).toFixed(2) + "s";
+      fire.appendChild(e);
+    }
+  }
+
+  /* ---------- Les ombres ---------- */
+
+  const shadows = [];
+  let running = false;
+
+  function spawnShadow() {
+    const el = document.createElement("div");
+    el.className = "shadow";
+
+    /* Elles arrivent de la droite, à des profondeurs différentes */
+    const depth = 0.75 + Math.random() * 0.45;
+    const startX = window.innerWidth + 60;
+    const fireX = window.innerWidth * 0.26;
+    const tx = -(startX - fireX) * depth;
+
+    el.style.left = startX + "px";
+    el.style.bottom = (20 + Math.random() * 6) + "%";
+    el.style.setProperty("--tx", tx.toFixed(0) + "px");
+    el.style.setProperty("--walk", (REDUCED ? 9999 : 6.5 + Math.random() * 3.5) + "s");
+    el.style.transform = `scale(${depth})`;
+
+    scene.appendChild(el);
+
+    const shadow = { el, depth, dead: false, timer: null };
+    shadows.push(shadow);
+
+    /* L'animation démarre à la frame suivante pour que la transition
+       soit bien prise en compte */
+    requestAnimationFrame(() => el.classList.add("approach"));
+
+    /* Le héros tire quand l'ombre est assez proche */
+    const travel = parseFloat(getComputedStyle(el).getPropertyValue("--walk")) || 8;
+    const aimAt = travel * (0.45 + Math.random() * 0.25);
+    shadow.timer = setTimeout(() => shoot(shadow), aimAt * 1000);
+  }
+
+  /* ---------- Le tir ---------- */
+
+  function shoot(shadow) {
+    if (shadow.dead || !running) return;
+    shadow.dead = true;
+    clearTimeout(shadow.timer);
+
+    const rect = shadow.el.getBoundingClientRect();
+    const targetX = rect.left + rect.width / 2;
+    const targetY = rect.top + rect.height * 0.32;
+
+    /* Le fusil est à droite du héros */
+    const muzzleX = window.innerWidth * 0.37 + 150;
+    const muzzleY = window.innerHeight * 0.72;
+
+    /* Flash */
+    muzzle.classList.remove("go");
+    void muzzle.offsetWidth;
+    muzzle.classList.add("go");
+
+    /* Traçante */
+    const tracer = document.createElement("div");
+    tracer.className = "tracer go";
+    const dist = Math.hypot(targetX - muzzleX, targetY - muzzleY);
+    const angle = Math.atan2(targetY - muzzleY, targetX - muzzleX);
+    tracer.style.left = muzzleX + "px";
+    tracer.style.top = muzzleY + "px";
+    tracer.style.width = dist + "px";
+    tracer.style.transform = `rotate(${angle}rad)`;
+    scene.appendChild(tracer);
+    setTimeout(() => tracer.remove(), 220);
+
+    /* L'ombre s'effondre */
+    shadow.el.classList.remove("approach");
+    shadow.el.classList.add("dying");
+    setTimeout(() => {
+      shadow.el.remove();
+      const i = shadows.indexOf(shadow);
+      if (i > -1) shadows.splice(i, 1);
+    }, 560);
+  }
+
+  /* ---------- Orchestration ---------- */
+
+  function start() {
+    if (running) return;
+    running = true;
+
+    /* Nettoie ce qui reste d'une précédente passe */
+    for (const s of shadows) { clearTimeout(s.timer); s.el.remove(); }
+    shadows.length = 0;
+
+    /* Vague 1 : une première ombre, pour poser le rythme */
+    setTimeout(() => running && spawnShadow(), 900);
+
+    /* Vague 2 : deux en même temps */
+    setTimeout(() => { running && spawnShadow(); running && spawnShadow(); }, 4200);
+
+    /* Vague 3 : trois, plus serrées */
+    setTimeout(() => {
+      if (!running) return;
+      spawnShadow();
+      setTimeout(() => running && spawnShadow(), 1400);
+      setTimeout(() => running && spawnShadow(), 2600);
+    }, 8600);
+
+    /* Vague 4 : le dernier assaut */
+    setTimeout(() => {
+      if (!running) return;
+      spawnShadow();
+      setTimeout(() => running && spawnShadow(), 900);
+      setTimeout(() => running && spawnShadow(), 1800);
+      setTimeout(() => running && spawnShadow(), 2700);
+    }, 14200);
+
+    /* Fin de la séquence : le feu crépite, le silence revient */
+    setTimeout(() => { running = false; }, 20000);
+  }
+
+  replayBtn.addEventListener("click", start);
+
+  buildStars();
+  buildEmbers();
+  start();
+</script>
+
+</body>
+</html>

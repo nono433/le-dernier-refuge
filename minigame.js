@@ -304,7 +304,16 @@ const MiniGame = (() => {
       const panel = make("div", `mg-result ${won ? "win" : "lose"}`, stage);
       nodes.push(panel);
 
+      /* Une victoire peut se conclure par une cinématique.
+         Le champ "video" du jeu désigne la vidéo à lire.
+         Elle ne se joue qu'en cas de réussite : l'échec
+         garde l'écran de résultat habituel. */
+      const cinematic = won && config.video
+        ? `<video class="mg-video" src="${config.video}" autoplay muted loop playsinline></video>`
+        : "";
+
       panel.innerHTML = `
+        ${cinematic}
         <h3>${part.title}</h3>
         <p>${part.text}</p>
         <p class="mg-nova">◈ NOVA — ${part.nova}</p>

@@ -600,6 +600,7 @@ const STORY = {
       game: {
         action: "Tenir le feu jusqu'à l'aube",
         image: "assets/images/campement.jpg",
+        video: "assets/videos/veillee.mp4",
         title: "Veillée",
         brief: "Le feu les tient à distance. Chaque silhouette qui franchit la lumière est la dernière chose que tu verras cette nuit.",
         ammo: 10,

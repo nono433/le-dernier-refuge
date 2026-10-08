@@ -335,6 +335,31 @@
   animation: mg-fade 0.45s ease-out both;
 }
 
+/* ---------- Cinématique de victoire ---------- */
+
+.mg-video {
+  width: min(100%, 420px);
+  border-radius: 6px;
+  border: 1px solid rgba(151, 131, 92, 0.4);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+  background: #05070a;
+  margin-bottom: 6px;
+}
+
+.mg-video::-webkit-media-controls-panel {
+  background: rgba(6, 8, 10, 0.85);
+}
+
+.mg-video::-webkit-media-controls-play-button {
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.mg-video:focus-visible {
+  outline: 2px solid var(--nova);
+  outline-offset: 3px;
+}
+
 .mg-result h3 {
   font-family: var(--font-title);
   font-size: clamp(1.3rem, 4vw, 1.8rem);

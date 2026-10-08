@@ -82,6 +82,21 @@ Le résultat change l'histoire : la réussite ouvre une voie, l'échec mène à 
 
 **Pour jouer** : viser et tirer à la souris ou au doigt. Au clavier, les flèches ou `ZQSD` déplacent le viseur et `Espace` tire. Le décor est l'illustration de la scène elle-même : aucun fichier image supplémentaire n'est nécessaire.
 
+### La cinématique de victoire
+
+Tenir le feu jusqu'à l'aube se conclut par une **cinématique** : l'homme cybernétique, ses ombres, le feu de camp. Elle ne se joue qu'en cas de réussite — l'échec garde l'écran de résultat habituel.
+
+La vidéo est lue en boucle, sans son, dans l'écran de victoire. Le champ `video` du jeu désigne le fichier :
+
+```js
+game: {
+  // ...
+  video: "assets/videos/veillee.mp4",  // optionnel : cinématique de victoire
+}
+```
+
+Ajouter une vidéo à un autre jeu suffit à déclarer ce champ. Aucune vidéo ne signifie aucun écran de cinématique.
+
 ### Écrire un mini-jeu
 
 Ajoutez un bloc `game` à n'importe quelle scène. Les choix habituels restent accessibles : le joueur peut passer son chemin.
