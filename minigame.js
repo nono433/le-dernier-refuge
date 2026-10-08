@@ -20,9 +20,8 @@ const MiniGame = (() => {
 
   let stop = null;   // fonction de démontage de la partie en cours
 
-  /* Un joueur qui n'a pas de temps pour viser finement doit tout de même
-     pouvoir gagner. On retient les cibles avec un peu de marge. */
-  const HIT_RADIUS_RATIO = 0.7;
+  /* Marge de tir réduite : la difficulté monte. */
+  const HIT_RADIUS_RATIO = 0.55;
 
   /* ---------- Petites aides ---------- */
 

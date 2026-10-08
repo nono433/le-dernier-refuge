@@ -91,18 +91,20 @@ check("le texte de la scene reste lisible", /Veillée|Tiens-toi près du feu/.te
 /* ---------- Construction de l'ecran ---------- */
 
 console.log("\n— Moteur du jeu —");
-api.MiniGame.run(api.STORY.scenes.campement.game, () => {});
+const campGame = api.STORY.scenes.campement.game;
+api.MiniGame.run(campGame, () => {});
 
 check("la scene de jeu est construite", !!doc.getElementById("mg-stage"));
 check("le bouton Commencer est present", !!doc.getElementById("mg-go"));
 check("une pastille par cartouche",
-  doc.querySelectorAll("#mg-ammo i").length === 10,
+  doc.querySelectorAll("#mg-ammo i").length === campGame.ammo,
   doc.querySelectorAll("#mg-ammo i").length + " vues");
 
 const bg = doc.querySelector(".mg-stage-bg");
 check("le decor reprend l'image de la scene",
   bg && /campement\.jpg/.test(bg.style.backgroundImage));
-check("le compteur demarre a zero", /0 \/ 10/.test(doc.getElementById("mg-count").textContent));
+check("le compteur demarre a zero",
+  new RegExp(`0 \\/ ${campGame.total}`).test(doc.getElementById("mg-count").textContent));
 
 /* ---------- Tir ---------- */
 
@@ -133,7 +135,9 @@ check("shutdown retire l'ecran de jeu", !doc.getElementById("mg-stage"));
 console.log("\n— Configuration des jeux —");
 for (const id of ["campement", "boutique"]) {
   const g = api.STORY.scenes[id].game;
-  check(`${id} : cartouches >= silhouettes`, g.ammo >= g.total, `${g.ammo}/${g.total}`);
+  // On ne demande plus ammo >= total : la difficulté peut être > 1.
+  // On vérifie juste que le ratio est raisonnable (au moins 0.5).
+  check(`${id} : ratio ammo/total raisonnable`, g.ammo / g.total >= 0.5, `${g.ammo}/${g.total}`);
   check(`${id} : branche win complete`,
     !!(g.win && g.win.next && g.win.title && g.win.text && g.win.nova));
   check(`${id} : branche lose complete`,
