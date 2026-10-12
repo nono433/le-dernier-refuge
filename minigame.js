@@ -20,8 +20,8 @@ const MiniGame = (() => {
 
   let stop = null;   // fonction de démontage de la partie en cours
 
-  /* Marge de tir réduite : la difficulté monte. */
-  const HIT_RADIUS_RATIO = 0.55;
+  /* Marge de tir serrée : il faut viser au cœur de la cible. */
+  const HIT_RADIUS_RATIO = 0.5;
 
   /* ---------- Petites aides ---------- */
 
@@ -170,10 +170,10 @@ const MiniGame = (() => {
       else if (edge === 2) { x = fromX;                    y = Math.random() * h; }
       else                 { x = -30;                      y = Math.random() * h; }
 
-      /* Les dernières silhouettes pressent un peu plus : on raccourcit
+      /* Les dernières silhouettes pressent plus fort : on raccourcit
          le trajet au lieu d'augmenter le nombre d'adversaires, pour
          garder la scène lisible. */
-      const ramp = REDUCED_MOTION ? 1 : 1 - (spawned - 1) * 0.045;
+      const ramp = REDUCED_MOTION ? 1 : 1 - (spawned - 1) * 0.055;
       const travel = Math.max(1400, Math.round(config.travel * ramp * (0.85 + Math.random() * 0.3)));
 
       node.style.left = x + "px";

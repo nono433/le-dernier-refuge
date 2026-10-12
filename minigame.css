@@ -327,18 +327,26 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  padding: 30px;
+  justify-content: safe center;
+  gap: 12px;
+  padding: 24px 30px;
   text-align: center;
   background: rgba(6, 8, 10, 0.9);
   backdrop-filter: blur(2px);
+  overflow-y: auto;
   animation: mg-fade 0.45s ease-out both;
 }
 
 /* ---------- Cinématique de victoire ---------- */
 
 .mg-video {
-  width: min(100%, 420px);
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 420px);
+  max-height: min(36vh, 220px);
+  object-fit: contain;
+  flex: 0 0 auto;
   border-radius: 6px;
   border: 1px solid rgba(151, 131, 92, 0.4);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);

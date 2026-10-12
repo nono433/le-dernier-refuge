@@ -70,8 +70,8 @@ Deux scènes ne proposent pas des choix mais un **jeu de réflexes et de tir**. 
 
 | Scène        | Situation                            | Silhouettes | Cartouches |
 | ------------ | ------------------------------------- | ----------- | ---------- |
-| Le Campement | Tenir la feuillée jusqu'à l'aube      | 10          | 8          |
-| La Boutique  | Frapper la variante avant qu'elle bondisse | 3        | 2          |
+| Le Campement | Tenir la feuillée jusqu'à l'aube      | 10          | 12         |
+| La Boutique  | Frapper la variante avant qu'elle bondisse | 3        | 4          |
 
 Le résultat change l'histoire : la réussite ouvre une voie, l'échec mène à une fin.
 
@@ -123,7 +123,7 @@ ma_scene: {
 }
 ```
 
-`next` et `set` de `win` et `lose` se comportent comme ceux d'un choix : une scène de jeu peut donc mener vers une autre scène, une fin, ou poser un drapeau. `ammo` peut être inférieur à `total` : c'est le réglage de difficulté (ici 8 balles pour 10 silhouettes — il faut viser juste). Gardez un ratio d'au moins 0.5 pour que la partie reste gagnable.
+`next` et `set` de `win` et `lose` se comportent comme ceux d'un choix : une scène de jeu peut donc mener vers une autre scène, une fin, ou poser un drapeau. **`ammo` doit être au moins égal à `total`** : la victoire exige d'abattre toutes les silhouettes, donc `ammo < total` rend la partie impossible à gagner. Prévoyez quelques cartouches de marge pour pardonner les tirs manqués (ici 12 balles pour 10 silhouettes).
 
 Le moteur ménage le joueur : il respecte `prefers-reduced-motion`, autorise le jeu au clavier seul, et se démonte proprement si le joueur change de page en plein jeu. Un filet de sécurité garantit qu'une partie se termine toujours, même si la cible finit par arriver.
 

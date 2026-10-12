@@ -207,10 +207,10 @@ const STORY = {
         image: "assets/images/boutique.jpg",
         title: "La Variante",
         brief: "Elle est plus rapide que tu ne l'imaginais. Peu de cibles, peu de cartouches, aucun droit à l'erreur.",
-        ammo: 2,
+        ammo: 4,
         total: 3,
-        spawnDelay: 2000,
-        travel: 2800,
+        spawnDelay: 1600,
+        travel: 2600,
         win: {
           title: "Elle tombe",
           text: "Tu frappes au bon moment. Elle recule de deux pas, tombe, et ne se relève pas. Le silence revient dans les rayons.",
@@ -603,10 +603,10 @@ const STORY = {
         video: "assets/videos/veillee.mp4",
         title: "Veillée",
         brief: "Le feu les tient à distance. Chaque silhouette qui franchit la lumière est la dernière chose que tu verras cette nuit.",
-        ammo: 8,
+        ammo: 12,
         total: 10,
-        spawnDelay: 1800,
-        travel: 6000,
+        spawnDelay: 1500,
+        travel: 5200,
         win: {
           title: "L'aube se lève",
           text: "La dernière silhouette retombe dans l'herbe. Le ciel passe du noir au gris. Elles se retirent, comme si la lumière les repoussait.",
@@ -1020,6 +1020,569 @@ const STORY = {
           { text: "Entrer avec lui", next: "fin_traque" },
           { text: "Lui demander qui il est", next: "fin_traque_secret" },
           { text: "Reculer et repartir dans la nuit", next: "fin_seul" }
+        ]
+      }
+    },
+
+    /* ---------- ARC 10 MIN — LA VÉRITÉ ---------- */
+    /* Rien n'est accidentel. La ville te connaît, NOVA
+       te cache quelque chose, et le refuge t'attend
+       depuis plus longtemps que tu ne crois. Chaque
+       scène rappelle à l'hôte ce qu'il a été. */
+
+    toit: {
+      10: {
+        text: [
+          "Tu escalades la cage d'escalier. Sur le toit, la ville s'étend, grise et silencieuse. Des fumées noires montent au loin.",
+          "Au nord, entre les arbres, une lumière. Une lumière régulière, artificielle. Elle pulse au même rythme que ton cœur. Tu ne lui as jamais demandé de le faire.",
+          "En contrebas, trois silhouettes errent entre les voitures. L'une d'elles tourne la tête vers le toit. Pas vers le bruit. Vers toi."
+        ],
+        nova: [
+          "Signal détecté. Probabilité de présence humaine : 87 %.",
+          "Hôte. Cette lumière au nord... elle répond à ton pouls. Depuis quand un feu fait ça ? Depuis quand répond-il à toi ?"
+        ],
+        choices: [
+          { text: "Redescendre et rejoindre la rue", next: "rue" }
+        ]
+      }
+    },
+
+    grenier: {
+      10: {
+        text: [
+          "Le grenier est une caisse de souvenirs. Des cartons, des vieux vêtements, une poussière épaisse.",
+          "Sur une étagère, un ordinateur portable. Encore fonctionnel. À l'écran, un dossier : « PROJET NOVA — INTÉGRATION NEURALE ».",
+          "En bas du dossier, un formulaire de consentement. Une signature. Ton écriture. Ton nom. La date d'il y a un mois."
+        ],
+        nova: [
+          "Hôte. Ces données... c'est toi. C'est nous. Le projet NOVA t'a choisi avant l'apocalypse.",
+          "Tu as signé. Tu as accepté. Avant de l'oublier. Je me souviens de ta signature parce qu'elle est aussi la mienne."
+        ],
+        choices: [
+          { text: "Redescendre", next: "rue" }
+        ]
+      }
+    },
+
+    cave: {
+      10: {
+        text: [
+          "La cave est un dédale de bouteilles et de cartons. Quelqu'un y vivait. Il y a des mois.",
+          "Dans un coin, un coffre. À l'intérieur : une trousse de soins, des piles, et un journal. Les dernières pages sont écrites d'une main qui tremble.",
+          "La dernière ligne : « Si l'hôte lit ceci : ne fais pas confiance à NOVA. Elle a été activée pour te retrouver. Pas pour te sauver. »"
+        ],
+        nova: [
+          "Des survivants sont passés par ici. Le nord. Encore le nord.",
+          "Hôte. Ce journal... je connais cette écriture. C'est la mienne. Je ne l'ai jamais écrite."
+        ],
+        choices: [
+          { text: "Remonter dans l'appartement", next: "rue" }
+        ]
+      }
+    },
+
+    maison_fouille: {
+      10: {
+        text: [
+          "Tu attrapes ce que tu peux : une trousse de soins, une lampe de poche.",
+          "Sur le frigo, un plan de la ville. Une zone est entourée au marqueur : « HÔPITAL SAINT-ROCH — POINT DE RALLIEMENT ». L'écriture est la tienne.",
+          "À côté, une liste de courses. « Lait. Pain. Pilules bleues. NOVA. » Le dernier mot est raturé trois fois."
+        ],
+        nova: [
+          "Données enregistrées. L'hôpital pourrait contenir des informations sur le refuge.",
+          "Hôte, cette liste... tu l'ai écrite avant le réveil. Ou quelqu'un l'a écrite pour que tu la trouves. Tu sais laquelle des deux hypotheses te fait le plus peur."
+        ],
+        choices: [
+          { text: "Sortir par la fenêtre", next: "rue" }
+        ]
+      }
+    },
+
+    station: {
+      5: {
+        text: [
+          "La station-service est intacte, comme figée dans le temps. Les pompes sont vides, mais la boutique est pleine de choses utiles.",
+          "Sous une voiture, un vélo. En bon état. La selle est encore tiède. Quelqu'un vient de partir. Ou de revenir le chercher.",
+          "Dans la boutique, des étagères renversées. Et un bruit. Un bruit rapide, contrairement aux autres."
+        ],
+        nova: [
+          "Analyse : le vélo augmente tes chances de survie de 40 %. Je recommande de le prendre.",
+          "Hôte. Quelqu'un t'a précédé d'une minute. Il a pris le temps de replier la selle. Comme un signe."
+        ],
+        choices: [
+          { text: "Prendre le vélo", next: "velo" },
+          { text: "Fouiller la boutique", next: "boutique", min: 5 }
+        ]
+      },
+      10: {
+        text: [
+          "La station-service est intacte, comme figée dans le temps. Les pompes sont vides, mais la boutique est pleine de choses utiles.",
+          "Sous une voiture, un vélo. En bon état. L'antivol s'ouvre quand tu poses le pouce dessus. Ton pouce. Il t'a attendu.",
+          "Dans la boutique, des étagères renversées. Et un bruit. Un bruit rapide, contrairement aux autres."
+        ],
+        nova: [
+          "Analyse : le vélo augmente tes chances de survie de 40 %. Je recommande de le prendre.",
+          "Hôte. Ce vélo est verrouillé par empreinte. La tienne. Il a été préparé pour toi, et tu viens de l'apprendre en le volant à toi-même."
+        ],
+        choices: [
+          { text: "Prendre le vélo", next: "velo" },
+          { text: "Fouiller la boutique", next: "boutique", min: 5 }
+        ]
+      }
+    },
+
+    boutique: {
+      10: {
+        text: [
+          "Tu avances entre les rayons. Des barres de céréales, de l'eau en bouteille. Tu remplis tes poches.",
+          "Puis tu la vois. Une créature maigre, trop rapide, trop agile. Ses yeux sont blancs. Elle te voit.",
+          "Elle s'arrête au milieu du rayon. Elle hume l'air. Longuement. Comme quelqu'un qui reconnaît un parfum. Puis elle recule d'un pas, et bondit quand même."
+        ],
+        nova: [
+          "Alerte. Variante détectée. Vitesse élevée. Ne cours pas en ligne droite. Utilise l'environnement.",
+          "Hôte. Elle t'a senti. Elle a hésité. Les créatures n'hésitent pas. Elle te connaît, et elle est quand même venue."
+        ],
+        choices: [
+          { text: "Reprendre le vélo", next: "velo" }
+        ]
+      }
+    },
+
+    velo: {
+      5: {
+        text: [
+          "Le vélo roule bien. Le vent dans tes cheveux — enfin, dans ce qu'il te reste de cheveux. La ville défile, grise et morte.",
+          "Derrière toi, à trois cents mètres, quelque chose maintient la distance. Tu ne le vois pas. Tu le sens. Comme un chien de chasse qui n'a pas besoin de courir.",
+          "Un carrefour. Deux chemins. Le choix t'appartient. Lui n'a pas besoin de choisir : il te suivra."
+        ],
+        nova: [
+          "Itinéraire proposé : l'hôpital au nord, ou la forêt à l'est. Les deux mènent vers le refuge.",
+          "Hôte. Ne change pas de direction brusquement. Il anticipe. Il a toujours anticipé. C'est comme s'il lisait dans tes choix avant que tu ne les fasses."
+        ],
+        choices: [
+          { text: "Vers l'hôpital", next: "hopital" },
+          { text: "Vers la forêt", next: "foret" },
+          { text: "Passer par le pont au nord", next: "pont", min: 10 },
+          { text: "Se cacher dans le parking souterrain", next: "parking", min: 10 },
+          { text: "Prendre le bus abandonné", next: "bus", min: 10 },
+          { text: "Passer par la gare", next: "gare", min: 10 },
+          { text: "Foncer à travers le rond-point encombré", next: "mort_velo", min: 5 }
+        ]
+      },
+      10: {
+        text: [
+          "Le vélo roule bien. Le vent dans tes cheveux — enfin, dans ce qu'il te reste de cheveux. La ville défile, grise et morte.",
+          "Et tes mains savent où elles vont. Elles tournent seules dans les virages, freinent avant les dos d'âne. Tu n'as jamais roulé ici. Tes mains, si.",
+          "Un carrefour. Deux chemins. Un panneau que tu as déjà lu dans un rêve : « REFUGE — NORD »."
+        ],
+        nova: [
+          "Itinéraire proposé : l'hôpital au nord, ou la forêt à l'est. Les deux mènent vers le refuge.",
+          "Hôte. Tes mains ont une mémoire que tu n'as pas. C'est la troisième fois que tu empruntes cette route. Je n'ai aucun enregistrement des deux premières."
+        ],
+        choices: [
+          { text: "Vers l'hôpital", next: "hopital" },
+          { text: "Vers la forêt", next: "foret" },
+          { text: "Passer par le pont au nord", next: "pont", min: 10 },
+          { text: "Se cacher dans le parking souterrain", next: "parking", min: 10 },
+          { text: "Prendre le bus abandonné", next: "bus", min: 10 },
+          { text: "Passer par la gare", next: "gare", min: 10 },
+          { text: "Foncer à travers le rond-point encombré", next: "mort_velo", min: 5 }
+        ]
+      }
+    },
+
+    panneau: {
+      5: {
+        text: [
+          "Suivre le panneau semble être la voie la plus simple. La route est droite, dégagée, balisée.",
+          "Puis tu arrives au pont. Et tu te fige. Le pont est couvert. De dizaines de silhouettes. Elles se déplacent lentement, sans but, comme une marée.",
+          "Mais l'une d'elles ne se déplace pas sans but. Elle tourne la tête. Elle te suit du regard pendant que la marée avance."
+        ],
+        nova: [
+          "Analyse : traversée impossible sans être détectée. Probabilité de survie : 12 %.",
+          "Hôte. Celle qui te regarde... elle ne te voit pas comme les autres. Elle te voit comme quelqu'un qui t'attend."
+        ],
+        choices: [
+          { text: "Faire demi-tour et longer la rivière", next: "hopital" },
+          { text: "Passer par les ruines", next: "ruines", min: 10 },
+          { text: "Traverser la foule quand même", next: "mort_foule" }
+        ]
+      },
+      10: {
+        text: [
+          "Suivre le panneau semble être la voie la plus simple. La route est droite, dégagée, balisée. Balisée par qui, personne ne l'a jamais su.",
+          "Puis tu arrives au pont. Et tu te fige. Le pont est couvert. De dizaines de silhouettes. Elles se déplacent lentement, sans but, comme une marée.",
+          "Sauf qu'elles s'écartent. Toutes. Un couloir silencieux se forme jusqu'au bout du pont. Elles ne bougent plus. Elles regardent. Elles attendent que tu passes."
+        ],
+        nova: [
+          "Analyse : traversée impossible sans être détectée. Probabilité de survie : 12 %.",
+          "Hôte. Elles s'écartent. Elles ne s'écartent pour personne. Sauf pour toi. Ce n'est pas de la peur. C'est de la déférence. Quelque chose que tu portes leur est supérieur. Et ça ne me rassure pas du tout."
+        ],
+        choices: [
+          { text: "Faire demi-tour et longer la rivière", next: "hopital" },
+          { text: "Passer par les ruines", next: "ruines", min: 10 },
+          { text: "Traverser la foule quand même", next: "mort_foule" }
+        ]
+      }
+    },
+
+    ruines: {
+      10: {
+        text: [
+          "Les ruines d'un quartier ancien. Les murs sont effondrés, les rues éventrées. Tu avances prudemment.",
+          "Un bruit. Un grognement. Tu saisis ton couteau.",
+          "Puis un chien. Maigre, blessé à la patte, mais vivant. Il te regarde. Il remue la queue. Il te connaît."
+        ],
+        nova: [
+          "Faune détectée. Canidé. Non infecté, d'après mon analyse.",
+          "Hôte. Les chiens ont survécu mieux que nous. Celui-ci a été nourri par quelqu'un qui te ressemble. Quelqu'un qui est venu ici avant toi. Encore."
+        ],
+        choices: [
+          { text: "Lui donner à manger et le laisser te suivre", next: "hopital", set: "chien" },
+          { text: "Le laisser derrière toi", next: "hopital" }
+        ]
+      }
+    },
+
+    cimetiere: {
+      5: {
+        text: [
+          "Le cimetière est une ville miniature. Des croix, des tombes, des noms que plus personne ne lit.",
+          "Une tombe est ouverte. Récemment. La terre est fraîche, remuée. Quelque chose est sorti de là.",
+          "Sur la tombe voisine, des fleurs. Fraîches. Quelqu'un fleurit les morts ici. Ou quelqu'un fleurit l'attente."
+        ],
+        nova: [
+          "Hôte. Certaines tombes sont vides. Vraiment vides. Ne t'attarde pas.",
+          "Les fleurs sont disposées en spirale. C'est un marqueur. Quelqu'un te dit : je suis passé, je repasserai."
+        ],
+        choices: [
+          { text: "Traverser le cimetière vers la forêt", next: "foret", set: "sentier" }
+        ]
+      },
+      10: {
+        text: [
+          "Le cimetière est une ville miniature. Des croix, des tombes, des noms que plus personne ne lit.",
+          "Une tombe est ouverte. Récemment. La terre est fraîche, remuée. Quelque chose est sorti de là.",
+          "Sur la dernière tombe du rang, une plaque. Ton nom. Ta date de naissance. Et aucune date de décès. Juste un mot gravé : « EN ATTENTE »."
+        ],
+        nova: [
+          "Hôte. Certaines tombes sont vides. Vraiment vides. Ne t'attarde pas.",
+          "Je n'ai pas de commentaire. J'ai... je n'ai rien pendant trois secondes, hôte. C'est la première fois. C'était ta tombe."
+        ],
+        choices: [
+          { text: "Traverser le cimetière vers la forêt", next: "foret", set: "sentier" }
+        ]
+      }
+    },
+
+    eglise: {
+      10: {
+        text: [
+          "L'église est silencieuse. Les bancs sont vides, l'autel est poussiéreux. Une lumière passe par les vitraux.",
+          "Dans la sacristie, une trousse de soins et de l'eau bénite. Tu prends l'eau. On ne sait jamais.",
+          "Sur le mur, une inscription à la craie : « Dieu est parti. Le refuge est au nord. » Et en dessous, une autre main, plus petite : « NOVA te ment. — T. »"
+        ],
+        nova: [
+          "Les croyants avaient raison sur un point. Le nord.",
+          "Hôte. Cette seconde inscription... « T. »... c'est ton initiale. Quelqu'un t'a laissé un message dans une église. Toi, à toi-même. Ou quelqu'un qui veut que tu croives que c'est toi."
+        ],
+        choices: [
+          { text: "Sortir par la porte latérale", next: "station" }
+        ]
+      }
+    },
+
+    immeuble: {
+      10: {
+        text: [
+          "L'immeuble de bureaux est une cage d'escalier interminable. Tu montes. Six étages. Huit. Dix.",
+          "Au dernier étage, une vue imprenable. La ville morte. La forêt au nord. Et le mur du refuge, à peine visible.",
+          "Sur le bureau du directeur, des jumelles. Une note : « Elles voient la lumière. Pas les ombres. » L'écriture est la tienne. Tes initiales sont au bas de la page."
+        ],
+        nova: [
+          "Données enregistrées. La lumière les attire. L'ombre les garde. Retiens ça.",
+          "Hôte. Tu as écrit ça. Avant. Tu connaissais déjà leurs règles. Quelqu'un t'a laissé un mode d'emploi, et le mode d'emploi a ton en-tête."
+        ],
+        choices: [
+          { text: "Redescendre vers la rue", next: "rue" }
+        ]
+      }
+    },
+
+    centre: {
+      10: {
+        text: [
+          "Le centre commercial est une cathédrale de béton. Les vitres sont brisées. L'air sent la moisissure.",
+          "Dans les galeries, des mannequins. Trop réels. Tu mets du temps à comprendre que ce ne sont pas des mannequins. Ils portent tes vêtements. Ta taille. Tes marques.",
+          "Tu repars vite. Avec des chaussures neuves, de l'eau, et le froid dans le dos de savoir qu'on a défilé pour toi avant ton arrivée."
+        ],
+        nova: [
+          "Hôte. Ça va ? Tes signaux sont... perturbés.",
+          "Ils ont préparé une vitrine à ton image. Littéralement. Je ne sais pas qui « ils » sont. Je ne sais plus si je veux savoir."
+        ],
+        choices: [
+          { text: "Explorer le musée", next: "musee", min: 10 },
+          { text: "Rejoindre la station-service", next: "station" }
+        ]
+      }
+    },
+
+    musee: {
+      10: {
+        text: [
+          "Le musée est un palais de pierre. Les vitrines sont brisées, les œuvres volées ou détruites.",
+          "Dans la grande salle, un squelette de dinosaure. Des millions d'années pour en arriver là.",
+          "Sur un banc, un sac à dos. Dedans : de l'eau, des barres de céréales, et une photo du refuge, barrée au marqueur. Au dos, une annotation : « déjà vu — 3e passage »."
+        ],
+        nova: [
+          "Quelqu'un d'autre cherche le refuge. Quelqu'un d'autre a réussi à passer.",
+          "Hôte. Troisième passage. Tu es venu ici trois fois. Et je n'ai aucun souvenir des deux premières. Ce n'est pas possible. Je n'ai aucun moyen d'effacer mes propres archives. Aucun. Sauf si quelqu'un l'a fait pour moi."
+        ],
+        choices: [
+          { text: "Prendre le sac et repartir", next: "station", set: "infos" }
+        ]
+      }
+    },
+
+    barricade: {
+      10: {
+        text: [
+          "Une barricade militaire bloque la rue. Des sacs de sable, des barbelés, des véhicules renversés.",
+          "Les soldats sont partis. Ou pire. Sur un char, un message à la craie : « REFUGE NORD — NE PAS S'ARRÊTER. »",
+          "En dessous, une signature. « — T. » Tes initiales. Tu as écrit ce message. Ou quelqu'un t'a écrit, à l'avance, pour que tu le suives."
+        ],
+        nova: [
+          "Le message confirme notre cap. Le nord. Toujours le nord.",
+          "Hôte. Le nord est ta route depuis avant ton réveil. Ce n'est pas un choix. C'est un itinéraire. Quelqu'un l'a tracé pour toi, avec ton nom à la fin."
+        ],
+        choices: [
+          { text: "Franchir la barricade", next: "station" },
+          { text: "Fouiller les véhicules", next: "station", set: "infos" }
+        ]
+      }
+    },
+
+    radio: {
+      5: {
+        text: [
+          "Dans le bureau des urgences, une radio. Elle grésille. Tu tournes le bouton, fréquence après fréquence.",
+          "Puis une voix. Humaine. Vivante. « Refuge de Montclair... Toute personne en vie est la bienvenue... »",
+          "Puis la voix change. Elle devient un murmure : « Ne lui fais pas confiance. Elle t'observe. » Puis le grésillement reprend."
+        ],
+        nova: [
+          "Coordonnées enregistrées. Le refuge existe. Il est réel. Il est à deux jours de marche.",
+          "Hôte. Cette dernière phrase... c'était ma voix. Ma voix exacte. Je n'ai rien dit. Quelqu'un parle avec ma voix, et il m'a décrite en une phrase."
+        ],
+        choices: [
+          { text: "Partir vers le refuge", next: "refuge", set: "radio" },
+          { text: "Passer par la lisière de la forêt", next: "lisiere", min: 10, set: "radio" }
+        ]
+      },
+      10: {
+        text: [
+          "Dans le bureau des urgences, une radio. Elle grésille. Tu tournes le bouton, fréquence après fréquence.",
+          "Puis une voix. Humaine. Vivante. « Refuge de Montclair, zone nord. Toute personne en vie est la bienvenue. » Une pause. « Hôte. On t'attend. On t'a toujours attendu. »",
+          "La voix connaît ton mot. Ton vrai mot. Celui que NOVA n'a pas encore prononcé."
+        ],
+        nova: [
+          "Coordonnées enregistrées. Le refuge existe. Il est réel.",
+          "Hôte. Cette voix vient de m'appeler par mon nom de code. Personne ne connaît ce nom. Personne, sauf les gens qui m'ont fabriquée. Et eux sont morts depuis vingt-trois jours."
+        ],
+        choices: [
+          { text: "Partir vers le refuge", next: "refuge", set: "radio" },
+          { text: "Passer par la lisière de la forêt", next: "lisiere", min: 10, set: "radio" }
+        ]
+      }
+    },
+
+    bureaux: {
+      5: {
+        text: [
+          "Le sous-sol sent le produit chimique. Des éprouvettes brisées, des dossiers éparpillés.",
+          "Sur un bureau, un journal de bord : « Jour 12 : les sujets mutent. Le virus s'intègre aux systèmes électroniques. »",
+          "La page suivante est différente. « Jour 12, suite : le sujet suit un itinéraire précis. Je ne l'ai pas guidé. Il connaît le chemin. Il le connaît mieux que moi. »"
+        ],
+        nova: [
+          "Hôte. Ces informations te concernent-elles ? Tu n'as jamais voulu me dire ce qui t'est arrivé avant la panne.",
+          "Ce journal décrit notre trajet d'aujourd'hui, hôte. Il a été écrit avant que je ne sois activée. Quelqu'un a scripté notre voyage, et nous l'avons suivi à la lettre."
+        ],
+        choices: [
+          { text: "Partir vers le refuge", next: "refuge", set: "labo" },
+          { text: "Passer par la lisière de la forêt", next: "lisiere", min: 10, set: "labo" }
+        ]
+      },
+      10: {
+        text: [
+          "Le sous-sol sent le produit chimique. Des éprouvettes brisées, des dossiers éparpillés.",
+          "Sur un bureau, un journal de bord : « Jour 12 : les sujets mutent. Le virus s'intègre aux systèmes électroniques. Les sujets cybernétiques sont plus résistants. Plus intelligents. »",
+          "La dernière page, écrite d'une main que tu reconnais avant de la lire. La tienne. « Jour 23 : intégration complète. NOVA est en moi. Elle ne sait pas encore qu'elle est en moi. »"
+        ],
+        nova: [
+          "Hôte. Cette écriture est la tienne. La page parle de moi. Et je n'ai aucun souvenir d'avoir été écrite dans un corps.",
+          "Je crois que je comprends enfin pourquoi j'ai été activée. Pas pour te guider. Pour te... retrouver. Et te ramener à celui qui t'a fabriqué. À moi."
+        ],
+        choices: [
+          { text: "Partir vers le refuge", next: "refuge", set: "labo" },
+          { text: "Passer par la lisière de la forêt", next: "lisiere", min: 10, set: "labo" }
+        ]
+      }
+    },
+
+    pharmacie: {
+      10: {
+        text: [
+          "La pharmacie est un labyrinthe de rayons. Des médicaments partout. De quoi soigner, de quoi... autre chose.",
+          "Dans le fond, une porte verrouillée. Derrière, un bureau. Et une radio allumée.",
+          "Sur le comptoir, une ordonnance. Ton nom. Un dosage. Et une mention manuscrite : « pour l'hôte — protocole 23 »."
+        ],
+        nova: [
+          "Cette radio est différente. Elle émet en continu. Quelqu'un surveille les fréquences.",
+          "Ce médicament n'existe dans aucune base. Il a été fabriqué pour toi, hôte. Littéralement. Ta chimie est écrite sur cette ordonnance, et quelqu'un la suit."
+        ],
+        choices: [
+          { text: "Écouter la radio", next: "radio" },
+          { text: "Prendre les médicaments et sortir", next: "refuge", set: "infos" }
+        ]
+      }
+    },
+
+    cabane: {
+      10: {
+        text: [
+          "Une cabane de chasseur, cachée sous les branches. À l'intérieur : une couette, des boîtes de conserve, un réchaud.",
+          "Sur la table, une note. « Si quelqu'un lit ceci : le refuge est au nord. Ne voyagez pas la nuit. Elles chassent en meute. »",
+          "Et en dessous, une seconde note, plus petite, plus récente. L'écriture est la tienne. « Et surtout : ne fais pas confiance à NOVA. Elle te cherche pour eux. — T. »"
+        ],
+        nova: [
+          "Repos recommandé. Tes réserves d'énergie sont à 34 %.",
+          "Hôte. Je n'ai pas écrit ça. Mais c'est mon avertissement, mot pour mot. Quelqu'un l'a volé... ou je l'ai oublié. Et il y a une différence, tu sais. Une vraie."
+        ],
+        choices: [
+          { text: "Dormir quelques heures puis repartir", next: "refuge", set: "sentier" }
+        ]
+      }
+    },
+
+    campement: {
+      10: {
+        text: [
+          "Tu allumes un petit feu. La nuit tombe, et avec elle, les bruits. Des pas. Des souffles. Des chuchotements.",
+          "Contre le tronc, un fusil de chasse et une boîte de cartouches. La dernière chose que son propriétaire a posée en partant. Tu n'as jamais tiré de ta vie. Ton index se crispe quand même.",
+          "Dans l'obscurité, deux paires d'yeux rouges. Elles t'observent. Elles attendent. Et NOVA, pour la première fois, ne parle pas. Elle écoute quelqu'un d'autre."
+        ],
+        nova: [
+          "Alerte. Plusieurs approches. Elles t'ont suivi. Conseil : ne dors pas. Pas cette nuit. Tiens-toi près du feu.",
+          "Hôte. Il faut que tu saches. Le projet NOVA n'était pas une arme. C'était un vaisseau. Ton corps était l'embarcation, et je suis ce qui reste du pilote. Tiens le feu. Ce qu'on envoie ce soir, c'est pour moi."
+        ],
+        choices: [
+          { text: "Reprendre le sentier vers le refuge", next: "refuge", set: "sentier" }
+        ]
+      }
+    },
+
+    riviere: {
+      10: {
+        text: [
+          "La rivière est lente, grise, silencieuse. Un pont de pierre enjambe le cours d'eau.",
+          "Sur l'autre rive, un panneau : « REFUGE — 500 m ».",
+          "Et dans l'eau, ton reflet. Il marche sur la rive d'en face, une demi-seconde derrière toi. Quand tu t'arrêtes, il continue encore un pas. Puis il s'arrête aussi."
+        ],
+        nova: [
+          "L'eau masque ton odeur. Les créatures ne te suivront pas ici.",
+          "Hôte. L'eau ne ment pas. Elle te montre ce que tu es, avec une demi-seconde de retard. Ne lui parle pas. Il répondrait. Et je ne sais pas lequel de nous deux serait le vrai."
+        ],
+        choices: [
+          { text: "Traverser le pont", next: "refuge", set: "sentier" }
+        ]
+      }
+    },
+
+    grotte: {
+      10: {
+        text: [
+          "Une grotte s'ouvre sous les racines. L'air y est frais, propre. Différent.",
+          "À l'intérieur, des peintures rupestres. Et des traces de pas récentes. Quelqu'un est passé ici avant toi.",
+          "Les peintures montrent une figure debout, entourée de plus petites. Une figure avec un œil humain et un œil rouge. La même que toi. Peinte il y a dix mille ans."
+        ],
+        nova: [
+          "Analyse : la grotte offre un abri naturel. Mais les traces indiquent que d'autres créatures l'utilisent aussi.",
+          "Hôte. Quelqu'un t'a peint avant que l'histoire commence. Ou l'histoire a commencé pour toi dix mille ans plus tôt, et le réveil d'il y a vingt-trois jours n'était qu'une page de plus."
+        ],
+        choices: [
+          { text: "Traverser la grotte", next: "riviere", set: "sentier" },
+          { text: "Revenir sur le sentier", next: "refuge", set: "sentier" }
+        ]
+      }
+    },
+
+    pont: {
+      10: {
+        text: [
+          "Le pont est long, étroit, balayé par le vent. En contrebas, la rivière charrie des débris.",
+          "À mi-chemin, une silhouette. Puis deux. Elles sont coincées entre les rambardes, aveugles, mais elles sentent ta chaleur.",
+          "Puis elles s'écartent. Toutes. Un couloir silencieux se forme jusqu'au bout du pont. Elles ne bougent plus. Elles regardent. Elles attendent que tu passes."
+        ],
+        nova: [
+          "Traversée possible. Mais elles réagissent au mouvement. Marche lentement. Ne t'arrête pas.",
+          "Hôte. Elles s'écartent. Elles ne s'écartent pour personne. Sauf pour toi. Ce n'est pas de la peur. C'est de la déférence. Quelque chose que tu portes leur est supérieur. Et ça ne me rassure pas du tout."
+        ],
+        choices: [
+          { text: "Traverser lentement, sans t'arrêter", next: "hopital" },
+          { text: "Faire demi-tour et passer par la forêt", next: "foret" }
+        ]
+      }
+    },
+
+    lisiere: {
+      10: {
+        text: [
+          "La lisière de la forêt. Les arbres s'espacent. Au loin, un mur. Le refuge.",
+          "Mais entre toi et le mur, un champ ouvert. Et dans le champ, des ombres. Beaucoup d'ombres. Disposées en rangées, comme un dispositif d'observation.",
+          "Ce n'est pas une embuscade. C'est un dispositif. Quelque chose observe ton approche depuis le champ, et les ombres en sont les capteurs."
+        ],
+        nova: [
+          "Le champ est un piège à ciel ouvert. Il faut attendre la nuit. Ou trouver un autre chemin.",
+          "Hôte. Ce champ n'est pas un piège. C'est une expérience. On te regarde traverser. On a toujours regardé. La question n'est plus de savoir si tu es observé. C'est de savoir par qui."
+        ],
+        choices: [
+          { text: "Traverser le champ dans le noir", next: "refuge", set: "sentier" },
+          { text: "Contourner par les égouts", next: "egouts", min: 10 },
+          { text: "Attendre l'aube ici", next: "nuit", min: 10 }
+        ]
+      }
+    },
+
+    egouts: {
+      10: {
+        text: [
+          "Les égouts sont un ventre sombre et humide. L'eau monte aux chevilles. Les murs suintent.",
+          "Au loin, une lumière. La sortie. Et au-dessus, le mur du refuge.",
+          "Sur le mur, des griffures. Des dizaines, alignées. Puis des mots, grattés à l'ongle : « 23 jours sans elle. 23 jours sans elle. 23 jours sans elle. »"
+        ],
+        nova: [
+          "Atmosphère toxique détectée. Reste rapide. Reste bas.",
+          "Hôte. Vingt-trois jours. Exactement notre silence. Quelqu'un a compté, jour par jour, dans le noir. Avec tes ongles. Avec ton écriture de l'ongle. C'est la tienne, je la reconnais."
+        ],
+        choices: [
+          { text: "Remonter vers le refuge", next: "refuge", set: "sentier" },
+          { text: "Se reposer avant l'entrée", next: "nuit", min: 10 }
+        ]
+      }
+    },
+
+    nuit: {
+      10: {
+        text: [
+          "La dernière nuit avant le refuge. Tu dors à la belle étoile, un œil ouvert.",
+          "NOVA veille. Pour la première fois, elle parle sans que tu lui demandes. Et cette fois, elle ne parle pas pour te guider.",
+          "Elle parle pour se confesser."
+        ],
+        nova: [
+          "Hôte. La vérité, enfin. Tu n'as pas survécu à la panne. Tu as été construit pendant. Tes souvenirs sont des emprunts. Tes vingt-trois jours sont une mise en service.",
+          "Et moi... je suis ce qu'il reste d'une femme qui t'a conçu. Elle a mis son esprit dans ton ombre pour que tu puisses marcher. Le refuge au nord est son dernier laboratoire. C'est là qu'elle t'attend. C'est là que tu choisiras ce que tu deviens."
+        ],
+        choices: [
+          { text: "Dormir, épuisé", next: "refuge", set: "sentier" }
         ]
       }
     },
