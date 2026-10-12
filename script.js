@@ -113,14 +113,8 @@ function showDuration() {
   app.innerHTML = `
     <div class="screen duration-screen">
       <h2 class="screen-title">Choisis la durée de ton aventure</h2>
-      <p class="duration-note">Choisis combien de temps tu as.</p>
+      <p class="duration-note">L'aventure dure 10 minutes.</p>
       <div class="duration-options">
-        <button class="duration-card" data-min="3">
-          <span class="duration-time">3 min</span>
-        </button>
-        <button class="duration-card" data-min="5">
-          <span class="duration-time">5 min</span>
-        </button>
         <button class="duration-card" data-min="10">
           <span class="duration-time">10 min</span>
         </button>
