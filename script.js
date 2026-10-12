@@ -75,6 +75,7 @@ function turnPage(render) {
   }, 260);
 }
 
+/* ---------- Identification des drapeaux ---------- */
 
 function hasFlag(req) {
   if (Array.isArray(req)) return req.some((f) => flags[f]);
@@ -108,25 +109,20 @@ function showMenu() {
 
 function showDuration() {
   currentChoices = [];
+
   app.innerHTML = `
     <div class="screen duration-screen">
       <h2 class="screen-title">Choisis la durée de ton aventure</h2>
-      <p class="duration-note">Trois récits distincts. Tu ne rejoueras pas la même chose.</p>
+      <p class="duration-note">Choisis combien de temps tu as.</p>
       <div class="duration-options">
         <button class="duration-card" data-min="3">
-          <span class="duration-time">3 minutes</span>
-          <span class="duration-arc">La Fuite</span>
-          <span class="duration-desc">Une histoire courte et intense.<br>6 à 8 scènes.</span>
+          <span class="duration-time">3 min</span>
         </button>
         <button class="duration-card" data-min="5">
-          <span class="duration-time">5 minutes</span>
-          <span class="duration-arc">La Traque</span>
-          <span class="duration-desc">Une aventure plus développée.<br>10 à 12 scènes.</span>
+          <span class="duration-time">5 min</span>
         </button>
         <button class="duration-card" data-min="10">
-          <span class="duration-time">10 minutes</span>
-          <span class="duration-arc">La Vérité</span>
-          <span class="duration-desc">L'expérience complète.<br>18 à 22 scènes.</span>
+          <span class="duration-time">10 min</span>
         </button>
       </div>
       <button class="btn btn-ghost" id="btn-back">Retour</button>
@@ -140,6 +136,20 @@ function showDuration() {
   document.getElementById("btn-back").addEventListener("click", () => turnPage(showMenu));
 }
 
+/* ---------- Fonctions utilitaires pour le moteur ---------- */
+
+function sceneFor(id) {
+  const base = STORY.scenes[id];
+  if (!base) return null;
+  return base;
+}
+
+function endingFor(id) {
+  const base = STORY.endings[id];
+  if (!base) return null;
+  return base;
+}
+
 /* ---------- Démarrage ---------- */
 
 function startAdventure(min) {
@@ -147,76 +157,6 @@ function startAdventure(min) {
   flags = {};
   page = 0;
   showScene("reveil");
-}
-
-/* ---------- Récits par durée ----------
-   Les trois lectures ne partagent pas les mêmes scènes. Chaque durée
-   peut donc déclarer, dans STORY.variants :
-
-     - text    : le texte de la scène, réécrit pour cette durée
-     - nova    : les répliques de NOVA propres à cette durée
-     - title   : un titre différent
-     - image   : une autre illustration
-     - choices : une autre liste de choix
-     - next    : une redirection, pour cette durée seulement
-     - game    : un mini-jeu propre à cette durée
-
-   Exemple :
-     "rue": {
-       3:  { text: [...], next: "ruines" },
-       10: { choices: [...] }     // la version par défaut reste
-     }
-
-   Une durée sans déclaration voit la scène telle qu'elle est écrite
-   dans STORY.scenes : les trois récits se ressemblent alors, mais
-   aucune scène n'est dupliquée.
-
-   Les fins suivent la même règle, dans STORY.variants, sous la clé
-   "fin_<id>" si l'on veut rester dans les fins du livre.           */
-
-/* Un arc par durée : le nom du récit, montré à l'écran de sélection
-   pour que le joueur sache qu'il ne va pas jouer la même chose. */
-const ARCS = {
-  3: {
-    name: "La Fuite",
-    tagline: "Trois minutes pour sortir de la ville avant l'aube."
-  },
-  5: {
-    name: "La Traque",
-    tagline: "Cinq minutes, et quelque chose te suit depuis le début."
-  },
-  10: {
-    name: "La Vérité",
-    tagline: "Dix minutes pour découvrir ce que tu es vraiment."
-  }
-};
-
-function variantsFor(id) {
-  if (!STORY.variants) return null;
-  const table = STORY.variants[id];
-  return table ? table[duration] || null : null;
-}
-
-/* Renvoie la scène telle qu'elle doit être jouée pour la durée choisie :
-   la version de base, éventuellement surchargée. */
-function sceneFor(id) {
-  const base = STORY.scenes[id];
-  if (!base) return null;
-
-  const v = variantsFor(id);
-  if (!v) return base;
-
-  return Object.assign({}, base, v);
-}
-
-function endingFor(id) {
-  const base = STORY.endings[id];
-  if (!base) return null;
-
-  const v = variantsFor("fin_" + id);
-  if (!v) return base;
-
-  return Object.assign({}, base, v);
 }
 
 /* ---------- Écran : scène ---------- */
@@ -287,6 +227,7 @@ function showScene(id) {
 }
 
 /* ---------- Scène de mini-jeu : réflexes / tir ----------
+
    Remplace la liste de choix par un bouton qui lance le jeu.
    Le résultat (réussite ou échec) envoie vers une autre scène
    et peut poser un drapeau.                                      */
