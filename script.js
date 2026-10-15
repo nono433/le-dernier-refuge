@@ -102,7 +102,7 @@ function showMenu() {
       <p class="game-tagline">La ville est morte. Tu es à moitié machine.<br>Trouve le refuge avant qu'il ne soit trop tard.</p>
       <button class="btn btn-primary" id="btn-new">Nouvelle aventure</button>
     </div>`;
-  document.getElementById("btn-new").addEventListener("click", () => turnPage(showDuration));
+  document.getElementById("btn-new").addEventListener("click", () => turnPage(() => startAdventure(10)));
 }
 
 /* ---------- Écran : choix de la durée ---------- */
@@ -168,7 +168,9 @@ function showScene(id) {
   const choices = (scene.choices || []).filter(
     (c) => (!c.min || duration >= c.min) && (!c.requires || hasFlag(c.requires))
   );
-  currentChoices = choices;
+  // Limite à maximum 4 choix par page
+  const displayChoices = choices.slice(0, 4);
+  currentChoices = displayChoices;
 
   const novaLines = toArray(scene.nova);
   const extraNova = Object.entries(scene.novaIf || {})
@@ -198,7 +200,7 @@ function showScene(id) {
       <div class="choices">
         <p class="choices-label">Que fais-tu ?</p>
         <ol class="choices-list">
-          ${choices
+          ${displayChoices
             .map(
               (c, i) => `
             <li>
@@ -214,7 +216,7 @@ function showScene(id) {
     </div>`;
 
   document.querySelectorAll(".choice-btn").forEach((btn) =>
-    btn.addEventListener("click", () => choose(choices[Number(btn.dataset.index)]))
+    btn.addEventListener("click", () => choose(displayChoices[Number(btn.dataset.index)]))
   );
 
   window.scrollTo({ top: 0, behavior: "smooth" });
